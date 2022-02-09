@@ -1,52 +1,80 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import PlayList from "../../pages/PlayList";
+import { Link } from "react-router-dom";
+import * as BiIcons from "react-icons/bi";
+import * as AiIcons from "react-icons/ai";
 import * as BsIcons from "react-icons/bs";
-import * as FaIcons from "react-icons/fa";
-import RecentPlayed from "../../pages/RecentPlayed";
-import Recommended from "../../pages/Recommended";
 
 const Sidebar = () => {
     return (
-        <Router>
-            <div className="relative w-1/4 h-screen bg-slate-800 pl-5 py-5 mr-3">
-                <div>
-                    <h1 className="text-white text-3xl font-medium">
-                        Playlist
-                    </h1>
-                </div>
-                <div className="pt-5 pb-12">
-                    <ul>
-                        <li className="text-gray-600 hover:text-cyan-600 transition-all ease duration-200 flex items-center pb-3">
-                            <BsIcons.BsMusicNoteBeamed />
-                            <Link className="capitalize pl-4" to="/playlist">
-                                My Playlist
-                            </Link>
-                        </li>
-                        <li className="text-gray-600 hover:text-cyan-600 transition-all ease duration-200 flex items-center pb-3">
-                            <FaIcons.FaDotCircle />
-                            <Link
-                                className="capitalize pl-4"
-                                to="/recentplayed"
-                            >
-                                Last Listening
-                            </Link>
-                        </li>
-                        <li className="text-gray-600 hover:text-cyan-600 transition-all ease duration-200 flex items-center pb-3">
-                            <FaIcons.FaDotCircle />
-                            <Link className="capitalize pl-4" to="/recommended">
-                                Recommended
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-                <Routes>
-                    <Route path="/playlist" element={<PlayList />} />
-                    <Route path="/recentplayed" element={<RecentPlayed />} />
-                    <Route path="/recommended" element={<Recommended />} />
-                </Routes>
+        <div className="fixed w-[241px] h-screen bg-black pl-5 py-5 mr-3">
+            <Link to="/" className="flex items-center justify-start">
+                <BsIcons.BsSpotify className="text-4xl text-white inline-block mr-1" />
+                <p className="text-white text-2xl font-bold inline-block">
+                    Spotify
+                </p>
+            </Link>
+            <div className="pt-5 pb-12">
+                <ul>
+                    <li className="text-[#b3b3b3] hover:text-white transition-all ease duration-200 flex items-center pb-3">
+                        <Link
+                            to="/"
+                            className="flex items-center justify-start"
+                        >
+                            <AiIcons.AiOutlineHome className="text-xl font-bold" />
+                            <p className="capitalize pl-4 font-bold" to="/">
+                                Home
+                            </p>
+                        </Link>
+                    </li>
+                    <li className="text-[#b3b3b3] hover:text-white transition-all ease duration-200 flex items-center pb-3">
+                        <Link
+                            to="/search"
+                            className="flex items-center justify-start"
+                        >
+                            <AiIcons.AiOutlineSearch className="text-xl font-bold" />
+                            <p className="capitalize pl-4 font-bold">Search</p>
+                        </Link>
+                    </li>
+                    <li className="text-[#b3b3b3] hover:text-white transition-all ease duration-200 flex items-center pb-3">
+                        <Link
+                            to="/collection/playlist"
+                            className="flex items-center justify-start"
+                        >
+                            <BiIcons.BiLibrary className="text-xl font-bold" />
+                            <p className="capitalize pl-4 font-bold">Library</p>
+                        </Link>
+                    </li>
+                </ul>
+                <ul className="mt-5">
+                    <li className="pr-2 py-3">
+                        <Link
+                            to="/playlist"
+                            className="flex items-center justify-start"
+                        >
+                            <div className="flex items-center justify-center bg-[#b3b3b3] w-[24px] h-[24px]">
+                                <AiIcons.AiOutlinePlus />
+                            </div>
+                            <p className="pl-3 text-[#b3b3b3] hover:text-white transition-all ease duration-200 flex items-center capitalize pb-0 font-bold">
+                                create playlist
+                            </p>
+                        </Link>
+                    </li>
+                    <li className="pr-2 py-1">
+                        <Link
+                            to="/collection/playlist"
+                            className="flex items-center justify-start"
+                        >
+                            <div className="flex items-center justify-center bg-[#3494E6] w-[24px] h-[24px]">
+                                <AiIcons.AiFillHeart className="text-white" />
+                            </div>
+                            <p className="pl-3 text-[#b3b3b3] hover:text-white transition-all ease duration-200 flex items-center capitalize pb-0 font-bold">
+                                Liked songs
+                            </p>
+                        </Link>
+                    </li>
+                </ul>
             </div>
-        </Router>
+        </div>
     );
 };
 
