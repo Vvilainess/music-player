@@ -1,7 +1,7 @@
 import React from "react";
 
-const header = () => {
+const button = () => {
     return <div></div>;
 };
 
-export default header;
+export default button;

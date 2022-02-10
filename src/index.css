@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .login-btn {
+        @apply rounded-full bg-white text-xs text-black;
+    }
+}
