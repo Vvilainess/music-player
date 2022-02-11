@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Switch from "./components/router/Switch";
-import Credentials from "./components/auth/Credentials";
+import { Credentials } from "./components/auth/Credentials";
 import SideBar from "./components/sidebar/SideBar";
 
 function App() {

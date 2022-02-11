@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as BiIcons from "react-icons/bi";
 import * as AiIcons from "react-icons/ai";
@@ -15,10 +15,10 @@ const Sidebar = () => {
             </Link>
             <div className="pt-5 pb-12">
                 <ul>
-                    <li className="text-[#b3b3b3] hover:text-white transition-all ease duration-200 flex items-center pb-3">
+                    <li className="flex items-center pb-3">
                         <Link
                             to="/"
-                            className="flex items-center justify-start"
+                            className="flex items-center justify-start text-[#b3b3b3] hover:text-white active:text-white focus:text-white transition-all ease duration-200"
                         >
                             <AiIcons.AiOutlineHome className="text-xl font-bold" />
                             <p className="capitalize pl-4 font-bold" to="/">
@@ -26,19 +26,19 @@ const Sidebar = () => {
                             </p>
                         </Link>
                     </li>
-                    <li className="text-[#b3b3b3] hover:text-white transition-all ease duration-200 flex items-center pb-3">
+                    <li className="flex items-center pb-3">
                         <Link
                             to="/search"
-                            className="flex items-center justify-start"
+                            className="flex items-center justify-start text-[#b3b3b3] hover:text-white active:text-white focus:text-white transition-all ease duration-200 "
                         >
                             <AiIcons.AiOutlineSearch className="text-xl font-bold" />
                             <p className="capitalize pl-4 font-bold">Search</p>
                         </Link>
                     </li>
-                    <li className="text-[#b3b3b3] hover:text-white transition-all ease duration-200 flex items-center pb-3">
+                    <li className="flex items-center pb-3">
                         <Link
                             to="/collection/playlist"
-                            className="flex items-center justify-start"
+                            className="flex items-center justify-start text-[#b3b3b3] hover:text-white active:text-white focus:text-white transition-all ease duration-200 "
                         >
                             <BiIcons.BiLibrary className="text-xl font-bold" />
                             <p className="capitalize pl-4 font-bold">Library</p>
