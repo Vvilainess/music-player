@@ -1,82 +1,38 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Switch from "./components/router/Switch";
-import { Credentials } from "./components/auth/Credentials";
-import SideBar from "./components/sidebar/SideBar";
+import React, { useEffect } from "react";
+import Login from "./components/Login/Login";
+import Layout from "./components/Layout/Layout";
+import getTokenFromUrl from "./components/Auth/getTokenFromUrl";
+import getData from "./components/GetAPI/Axios";
+import { getPlaylist } from "./components/Auth/getTokenFromUrl";
+import { useStore, actions } from "./components/Store";
 
 function App() {
-    const spotify = Credentials();
-
-    const [token, setToken] = useState("");
-    const [genres, setGenres] = useState({
-        selectedGenre: "",
-        listOfGenresFromAPI: [],
-    });
-    const [playlist, setPlaylist] = useState({
-        selectedPlaylist: "",
-        listOfPlaylistFromAPI: [],
-    });
-    const [tracks, setTracks] = useState({
-        selectedTrack: "",
-        listOfTracksFromAPI: [],
-    });
-    const id = "06HL4z0CvFAxyc27GXpf02";
-    const market = "US";
-    const [trackDetail, setTrackDetail] = useState(null);
-    /*  useEffect(() => {
-        axios("https://accounts.spotify.com/api/token", {
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-                Authorization:
-                    "Basic " +
-                    btoa(spotify.ClientId + ":" + spotify.ClientSecret),
-            },
-            data: "grant_type=client_credentials",
-            method: "POST",
-        })
-            .then((tokenResponse) => {
-                console.log(tokenResponse);
-                setToken(tokenResponse.data.access_token);
-                axios(
-                    "https://api.spotify.com/v1/browse/categories?locale=sv_VN",
-                    {
-                        method: "GET",
-                        headers: {
-                            Authorization: "Bearer " + token,
-                        },
-                    }
-                ).then((genreResponse) => {
-                    console.log(genreResponse);
-                    setGenres({
-                        selectedGenre: genres.selectedGenre,
-                        listOfGenresFromAPI:
-                            genreResponse.data.categories.items,
-                    });
-                });
-            })
-            .then(() =>
-                axios(
-                    `https://api.spotify.com/v1/artists/${id}/top-tracks?market=${market}`,
-                    {
-                        method: "GET",
-                        headers: {
-                            Authorization: "Bearer " + token,
-                        },
-                    }
-                ).then((tracksResponse) => {
-                    console.log(tracksResponse);
+    const [state, dispatch] = useStore();
+    useEffect(() => {
+        const { access_token, token_type } = getTokenFromUrl();
+        window.location.hash = "";
+        if (access_token) {
+            console.log(access_token);
+            dispatch(actions.setToken(access_token));
+            /* Get user info */
+            getData("https://api.spotify.com/v1/me", access_token, "GET")
+                .then((userResponse) => {
+                    const { display_name, images } = userResponse.data;
+                    dispatch(actions.setUser({ display_name, images }));
                 })
-            );
-    }, [genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]); */
-
-    return (
-        <div className="App">
-            <SideBar />
-            <div className="relative ml-[241px]">
-                <Switch />
-            </div>
-        </div>
-    );
+                .catch((error) => {
+                    console.log(error);
+                });
+            /* Get Playlists */
+            getPlaylist(access_token)
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => console.log(error));
+        }
+        return () => {};
+    }, [state.token, state.user, dispatch]);
+    return <div className="App">{state.token ? <Layout /> : <Login />}</div>;
 }
 
 export default App;
