@@ -3,35 +3,49 @@ import Login from "./components/Login/Login";
 import Layout from "./components/Layout/Layout";
 import getTokenFromUrl from "./components/Auth/getTokenFromUrl";
 import getData from "./components/GetAPI/Axios";
-import { getPlaylist } from "./components/Auth/getTokenFromUrl";
+import { getPlaylist, getCategories } from "./components/Auth/getTokenFromUrl";
 import { useStore, actions } from "./components/Store";
 
 function App() {
     const [state, dispatch] = useStore();
+    const { access_token } = getTokenFromUrl();
     useEffect(() => {
-        const { access_token, token_type } = getTokenFromUrl();
         window.location.hash = "";
+        /* const refreshApp = setTimeout(() => {
+            window.location.reload();
+        }, expires_in); */
         if (access_token) {
             console.log(access_token);
             dispatch(actions.setToken(access_token));
-            /* Get user info */
             getData("https://api.spotify.com/v1/me", access_token, "GET")
                 .then((userResponse) => {
-                    const { display_name, images } = userResponse.data;
-                    dispatch(actions.setUser({ display_name, images }));
+                    const { display_name, images, id } = userResponse.data;
+                    console.log(id);
+                    dispatch(actions.setUser({ display_name, images, id }));
                 })
-                .catch((error) => {
-                    console.log(error);
-                });
-            /* Get Playlists */
-            getPlaylist(access_token)
-                .then((response) => {
-                    console.log(response.data);
-                })
-                .catch((error) => console.log(error));
+                .then(
+                    getPlaylist(
+                        `https://api.spotify.com/v1/me/playlists`,
+                        access_token
+                    ).then((response) => {
+                        console.log(response.data);
+                        const { items } = response.data;
+                        dispatch(actions.setPlaylist(items));
+                    })
+                )
+                .then(
+                    getCategories(
+                        `https://api.spotify.com/v1/browse/categories?offset=0&limit=50`,
+                        access_token
+                    ).then((response) => {
+                        console.log(response);
+                    })
+                );
         }
+        console.log("Rerender...");
+        console.log(state.playlist);
         return () => {};
-    }, [state.token, state.user, dispatch]);
+    }, [state, dispatch]);
     return <div className="App">{state.token ? <Layout /> : <Login />}</div>;
 }
 

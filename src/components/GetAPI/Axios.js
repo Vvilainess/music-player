@@ -7,6 +7,8 @@ const getData = (endpoint, token, method = "GET") => {
         },
         data: "grant_type=client_credentials",
         method: method,
+    }).catch((error) => {
+        console.log(error);
     });
 };
 

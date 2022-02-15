@@ -1,25 +1,31 @@
-import { SET_TOKEN, SET_USER } from "./constants";
+import { SET_TOKEN, SET_USER, SET_PLAYLIST } from "./constants";
 
 const initialState = {
     token: "",
     user: {},
+    playlist: [],
     discovery_weekly: null,
     top_artists: null,
     playing: false,
-    item: [],
+    categories: [],
 };
 
-function reducer(state, action) {
-    switch (action.type) {
+function reducer(state, actions) {
+    switch (actions.type) {
         case SET_TOKEN:
             return {
                 ...state,
-                token: action.payload,
+                token: actions.payload,
             };
         case SET_USER:
             return {
                 ...state,
-                user: action.payload,
+                user: actions.payload,
+            };
+        case SET_PLAYLIST:
+            return {
+                ...state,
+                playlist: actions.payload,
             };
         default:
             throw new Error("Invalid action!");
