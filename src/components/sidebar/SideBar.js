@@ -5,6 +5,10 @@ import * as AiIcons from "react-icons/ai";
 import * as BsIcons from "react-icons/bs";
 
 const Sidebar = () => {
+    const [isActiveTab, setIsActiveTab] = useState(1);
+    const handleTab = (idx) => {
+        setIsActiveTab(idx);
+    };
     return (
         <div className="fixed w-[241px] h-screen bg-black pl-5 py-5 mr-3">
             <Link to="/" className="flex items-center justify-start">
@@ -18,7 +22,14 @@ const Sidebar = () => {
                     <li className="flex items-center pb-3">
                         <Link
                             to="/"
-                            className="flex items-center justify-start text-[#b3b3b3] hover:text-white active:text-white focus:text-white transition-all ease duration-200"
+                            onClick={() => {
+                                handleTab(1);
+                            }}
+                            className={
+                                isActiveTab === 1
+                                    ? "flex items-center justify-start text-white hover:text-white transition-all ease duration-200"
+                                    : "flex items-center justify-start text-[#b3b3b3] hover:text-white transition-all ease duration-200"
+                            }
                         >
                             <AiIcons.AiOutlineHome className="text-xl font-bold" />
                             <p className="capitalize pl-4 font-bold" to="/">
@@ -29,7 +40,14 @@ const Sidebar = () => {
                     <li className="flex items-center pb-3">
                         <Link
                             to="/search"
-                            className="flex items-center justify-start text-[#b3b3b3] hover:text-white active:text-white focus:text-white transition-all ease duration-200 "
+                            className={
+                                isActiveTab === 2
+                                    ? "flex items-center justify-start text-white hover:text-white transition-all ease duration-200"
+                                    : "flex items-center justify-start text-[#b3b3b3] hover:text-white transition-all ease duration-200"
+                            }
+                            onClick={() => {
+                                handleTab(2);
+                            }}
                         >
                             <AiIcons.AiOutlineSearch className="text-xl font-bold" />
                             <p className="capitalize pl-4 font-bold">Search</p>
@@ -38,7 +56,14 @@ const Sidebar = () => {
                     <li className="flex items-center pb-3">
                         <Link
                             to="/collection/playlist"
-                            className="flex items-center justify-start text-[#b3b3b3] hover:text-white active:text-white focus:text-white transition-all ease duration-200 "
+                            className={
+                                isActiveTab === 3
+                                    ? "flex items-center justify-start text-white hover:text-white transition-all ease duration-200"
+                                    : "flex items-center justify-start text-[#b3b3b3] hover:text-white transition-all ease duration-200"
+                            }
+                            onClick={() => {
+                                handleTab(3);
+                            }}
                         >
                             <BiIcons.BiLibrary className="text-xl font-bold" />
                             <p className="capitalize pl-4 font-bold">Library</p>

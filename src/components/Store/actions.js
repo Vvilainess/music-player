@@ -1,4 +1,4 @@
-import { SET_TOKEN, SET_USER, SET_PLAYLIST } from "./constants";
+import { SET_TOKEN, SET_USER, SET_PLAYLIST, SET_CATEGORIES } from "./constants";
 
 export const setToken = (payload) => ({
     type: SET_TOKEN,
@@ -10,5 +10,9 @@ export const setUser = (payload) => ({
 });
 export const setPlaylist = (payload) => ({
     type: SET_PLAYLIST,
+    payload,
+});
+export const setCategories = (payload) => ({
+    type: SET_CATEGORIES,
     payload,
 });

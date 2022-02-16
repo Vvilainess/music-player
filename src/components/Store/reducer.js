@@ -1,4 +1,4 @@
-import { SET_TOKEN, SET_USER, SET_PLAYLIST } from "./constants";
+import { SET_TOKEN, SET_USER, SET_PLAYLIST, SET_CATEGORIES } from "./constants";
 
 const initialState = {
     token: "",
@@ -26,6 +26,11 @@ function reducer(state, actions) {
             return {
                 ...state,
                 playlist: actions.payload,
+            };
+        case SET_CATEGORIES:
+            return {
+                ...state,
+                categories: actions.payload,
             };
         default:
             throw new Error("Invalid action!");

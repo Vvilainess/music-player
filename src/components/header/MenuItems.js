@@ -1,5 +1,13 @@
 export const MenuItems = [
     {
+        title: "account",
+        url: "/account",
+    },
+    {
+        title: "profile",
+        url: "/profile",
+    },
+    {
         title: "premium",
         url: "/premium",
     },

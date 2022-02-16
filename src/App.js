@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import Login from "./components/Login/Login";
 import Layout from "./components/Layout/Layout";
-import getTokenFromUrl from "./components/Auth/getTokenFromUrl";
+import getTokenFromUrl, {
+    getPlaylist,
+    getCategories,
+} from "./components/auth/getTokenFromUrl";
 import getData from "./components/GetAPI/Axios";
-import { getPlaylist, getCategories } from "./components/Auth/getTokenFromUrl";
 import { useStore, actions } from "./components/Store";
 
 function App() {
@@ -11,9 +13,6 @@ function App() {
     const { access_token } = getTokenFromUrl();
     useEffect(() => {
         window.location.hash = "";
-        /* const refreshApp = setTimeout(() => {
-            window.location.reload();
-        }, expires_in); */
         if (access_token) {
             console.log(access_token);
             dispatch(actions.setToken(access_token));
@@ -38,12 +37,16 @@ function App() {
                         `https://api.spotify.com/v1/browse/categories?offset=0&limit=50`,
                         access_token
                     ).then((response) => {
-                        console.log(response);
+                        dispatch(
+                            actions.setCategories(
+                                response.data.categories.items
+                            )
+                        );
                     })
                 );
         }
         console.log("Rerender...");
-        console.log(state.playlist);
+        console.log(state.categories);
         return () => {};
     }, [state, dispatch]);
     return <div className="App">{state.token ? <Layout /> : <Login />}</div>;
