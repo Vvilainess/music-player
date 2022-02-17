@@ -4,7 +4,7 @@ import Layout from "./components/Layout/Layout";
 import getTokenFromUrl, {
     getPlaylist,
     getCategories,
-} from "./components/auth/getTokenFromUrl";
+} from "./components/Auth/getTokenFromUrl";
 import getData from "./components/GetAPI/Axios";
 import { useStore, actions } from "./components/Store";
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as BsIcons from "react-icons/bs";
-import { accessUrl } from "../auth/getTokenFromUrl";
+import { accessUrl } from "../Auth/getTokenFromUrl";
 
 const LoginForm = () => {
     const handleClick = () => {
