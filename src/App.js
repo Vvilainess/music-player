@@ -48,7 +48,7 @@ function App() {
         console.log("Rerender...");
         console.log(state.categories);
         return () => {};
-    }, [state, dispatch]);
+    }, [state.token, state.playlist, state.categories, dispatch]);
     return <div className="App">{state.token ? <Layout /> : <Login />}</div>;
 }
 

@@ -1,9 +1,16 @@
-import { SET_TOKEN, SET_USER, SET_PLAYLIST, SET_CATEGORIES } from "./constants";
+import {
+    SET_TOKEN,
+    SET_USER,
+    SET_PLAYLIST,
+    SET_CATEGORIES,
+    SET_SEARCHRESULT,
+} from "./constants";
 
 const initialState = {
     token: "",
     user: {},
     playlist: [],
+    searchResult: null,
     discovery_weekly: null,
     top_artists: null,
     playing: false,
@@ -31,6 +38,11 @@ function reducer(state, actions) {
             return {
                 ...state,
                 categories: actions.payload,
+            };
+        case SET_SEARCHRESULT:
+            return {
+                ...state,
+                searchResult: actions.payload,
             };
         default:
             throw new Error("Invalid action!");

@@ -127,7 +127,6 @@ const Sidebar = () => {
                         <div key={idx} className="pt-1 pb-1">
                             <Link
                                 to=""
-                                /* onClick={handleTab()} */
                                 className="text-[#b3b3b3] hover:text-white break-words text-sm"
                             >
                                 {list?.name}

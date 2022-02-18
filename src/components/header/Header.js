@@ -1,16 +1,42 @@
-import React from "react";
-import { useStore } from "../Store";
+import React, { useState, useEffect } from "react";
+import { actions, useStore } from "../Store";
 import LoginBtn from "../Login/LoginBtn";
 import * as AiIcons from "react-icons/ai";
+import getData from "../GetAPI/Axios";
 
 const Header = ({ searchInput }) => {
-    const [{ user }, dispatch] = useStore();
+    const [{ user, token, searchResult }, dispatch] = useStore();
+    const [input, setInput] = useState("");
+    const handleInput = (e) => {
+        setInput(e.target.value);
+    };
+    const getSearchResult = () => {
+        getData(
+            `https://api.spotify.com/v1/search?q=${input}&type=album&include_external=audio?`,
+            token,
+            "GET"
+        ).then((response) => {
+            console.log(response);
+            dispatch(actions.setSearchResult(response.data.albums.items));
+        });
+    };
+    useEffect(() => {
+        if (input) {
+            getSearchResult();
+        } else {
+            dispatch(actions.setSearchResult(null));
+        }
+    }, [input]);
     return (
         <div className="sticky bg-[#101010] h-[64px] flex justify-between items-center">
             {searchInput ? (
                 <>
-                    <form className="ml-11 relative">
+                    <form autoComplete="off" className="ml-11 relative">
                         <input
+                            value={input}
+                            onChange={(e) => {
+                                handleInput(e);
+                            }}
                             type="text"
                             name="search"
                             placeholder="Artists, songs, or podcasts"
