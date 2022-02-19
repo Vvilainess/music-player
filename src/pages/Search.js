@@ -12,12 +12,56 @@ const Search = () => {
             <div className="px-9 py-7">
                 {searchResult ? (
                     <>
-                        <div className="w-full pb-3">
-                            <h1 className="capitalize font-bold text-2xl text-white">
-                                Top result
-                            </h1>
+                        <div>
+                            <div className="flex flex-wrap items-center">
+                                <div className="sm:w-80 text-white md:w-80">
+                                    <div className="w-full pb-3">
+                                        <h1 className="capitalize font-bold text-2xl text-white">
+                                            Top result
+                                        </h1>
+                                    </div>
+                                    <div className="rounded-md hover:bg-[#282828] px-3 py-5">
+                                        <div className="pb-5">
+                                            <img
+                                                src={
+                                                    searchResult?.[0]
+                                                        .images?.[1].url
+                                                }
+                                                alt={searchResult?.[0].name}
+                                                className="w-24 h-24 rounded-md"
+                                            />
+                                        </div>
+                                        <div className="pb-1">
+                                            <h1 className="text-2xl text-white font-bold">
+                                                {searchResult?.[0].name}
+                                            </h1>
+                                        </div>
+                                        <div>
+                                            <p className="inline-block text-[#b3b3b3] hover:underline cursor-pointer pr-5">
+                                                {searchResult?.[0].artists.map(
+                                                    (artist) => {
+                                                        return (
+                                                            artist.name + ", "
+                                                        );
+                                                    }
+                                                )}
+                                            </p>
+                                            <span className="text-white text-md font-bold rounded-full uppercase leading-[1rem] bg-[rgba(0,0,0,.2)] px-3">
+                                                {searchResult?.[0].album_type}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex-1 sm:w-full md:w-full lg:w-96 text-white">
+                                    <div className="w-full pb-3">
+                                        <h1 className="capitalize font-bold text-2xl text-white">
+                                            songs
+                                        </h1>
+                                    </div>
+                                    Block 2
+                                </div>
+                            </div>
                         </div>
-                        <div></div>
                     </>
                 ) : (
                     <>

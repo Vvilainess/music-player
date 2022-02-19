@@ -35,7 +35,7 @@ const LoginBtn = ({ user }) => {
                     alt={user?.display_name}
                     src={user?.images?.[0].url}
                 />
-                <p to="" className="text-white hidden md:block">
+                <p to="" className="text-white hidden lg:block">
                     {user?.display_name}
                 </p>
                 <span to="">
