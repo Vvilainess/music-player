@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Login from "./components/Login/Login";
+import Login from "./components/Feature-components/Login";
 import Layout from "./components/Layout/Layout";
 import getTokenFromUrl, {
     getPlaylist,
@@ -45,8 +45,6 @@ function App() {
                     })
                 );
         }
-        console.log("Rerender...");
-        console.log(state.categories);
         return () => {};
     }, [state.token, state.playlist, state.categories, dispatch]);
     return <div className="App">{state.token ? <Layout /> : <Login />}</div>;

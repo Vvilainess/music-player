@@ -1,30 +1,32 @@
 import React, { useEffect } from "react";
-import Header from "../components/Header/Header";
+import Header from "../components/Header-components/Header";
 import { actions, useStore } from "../components/Store";
 
 const Search = () => {
     const [{ categories, searchResult, input }, dispatch] = useStore();
     console.log(searchResult);
     useEffect(() => {
-        if (searchResult?.total === 0) {
+        if (!input) {
             dispatch(actions.setSearchResult(null));
         }
     }, [searchResult, dispatch]);
     return (
         <div className="relative bg-[#121212]">
             <Header searchInput={true} />
-            {!searchResult?.[0] && input && (
-                <div className="w-full h-screen flex flex-col items-center justify-center">
-                    <h1 className="text-white font-bold font-3xl block">
-                        {"No results found for " + `"${input}"`}
-                    </h1>
-                    <p className="text-white font-xl block">
-                        Please make sure your words are spelled correctly or use
-                        less or different keywords.
-                    </p>
-                </div>
-            )}
             <div className="px-9 py-7">
+                {!searchResult?.[0] && input && (
+                    <div className="w-full h-screen top-0 right-0 bottom-0">
+                        <div className="flex flex-col items-center justify-center">
+                            <h1 className="text-white font-bold font-3xl block">
+                                {"No results found for " + `"${input}"`}
+                            </h1>
+                            <p className="text-white font-xl block">
+                                Please make sure your words are spelled
+                                correctly or use less or different keywords.
+                            </p>
+                        </div>
+                    </div>
+                )}
                 {!searchResult && !input && (
                     <>
                         <div className="w-full pb-3">

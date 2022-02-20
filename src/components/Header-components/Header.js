@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { actions, useStore } from "../Store";
-import LoginBtn from "../Login/LoginBtn";
+import LoginBtn from "../Feature-components/LoginBtn";
 import * as AiIcons from "react-icons/ai";
 import getData from "../GetAPI/Axios";
 
@@ -15,11 +15,8 @@ const Header = ({ searchInput }) => {
             token,
             "GET"
         ).then((response) => {
-            const { items, total } = response.data.albums;
-            if (!items[0]) {
-                dispatch(actions.setSearchResult(null));
-            } else {
-                dispatch(actions.setSearchResult(items, total));
+            if (input) {
+                dispatch(actions.setSearchResult(response.data.albums.items));
             }
         });
     };

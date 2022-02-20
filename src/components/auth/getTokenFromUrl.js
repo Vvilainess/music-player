@@ -23,7 +23,6 @@ const getTokenFromUrl = () => {
         .reduce((prev, curr) => {
             const [key, value] = curr.split("=");
             prev[key] = value;
-            console.log(prev);
             return prev;
         }, {});
 };

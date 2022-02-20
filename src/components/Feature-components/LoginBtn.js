@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { MenuItems } from "../Header/MenuItems";
+import { MenuItems } from "../Feature-components/MenuItems";
 import * as IoIcons from "react-icons/io";
 
 const LoginBtn = ({ user }) => {
