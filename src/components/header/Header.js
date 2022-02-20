@@ -5,10 +5,9 @@ import * as AiIcons from "react-icons/ai";
 import getData from "../GetAPI/Axios";
 
 const Header = ({ searchInput }) => {
-    const [{ user, token }, dispatch] = useStore();
-    const [input, setInput] = useState("");
+    const [{ user, token, input }, dispatch] = useStore();
     const handleInput = (e) => {
-        setInput(e.target.value);
+        dispatch(actions.setInput(e.target.value));
     };
     const getSearchResult = () => {
         getData(
@@ -16,8 +15,12 @@ const Header = ({ searchInput }) => {
             token,
             "GET"
         ).then((response) => {
-            console.log(response);
-            dispatch(actions.setSearchResult(response.data.albums.items));
+            const { items, total } = response.data.albums;
+            if (!items[0]) {
+                dispatch(actions.setSearchResult(null));
+            } else {
+                dispatch(actions.setSearchResult(items, total));
+            }
         });
     };
     useEffect(() => {
@@ -26,7 +29,7 @@ const Header = ({ searchInput }) => {
         } else {
             dispatch(actions.setSearchResult(null));
         }
-    }, [input]);
+    }, [input, dispatch]);
     return (
         <div className="sticky bg-[#101010] h-[64px] flex justify-between items-center">
             {searchInput ? (

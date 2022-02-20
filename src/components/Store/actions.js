@@ -4,6 +4,7 @@ import {
     SET_PLAYLIST,
     SET_CATEGORIES,
     SET_SEARCHRESULT,
+    SET_INPUT,
 } from "./constants";
 
 export const setToken = (payload) => ({
@@ -24,5 +25,9 @@ export const setCategories = (payload) => ({
 });
 export const setSearchResult = (payload) => ({
     type: SET_SEARCHRESULT,
+    payload,
+});
+export const setInput = (payload) => ({
+    type: SET_INPUT,
     payload,
 });
