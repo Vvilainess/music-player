@@ -5,6 +5,18 @@ import { actions, useStore } from "../components/Store";
 const Search = () => {
     const [{ categories, searchResult, input }, dispatch] = useStore();
     console.log(searchResult);
+    const groupBy = (keys) => (array) =>
+        array.reduce((objectsByKeyValue, obj) => {
+            const value = keys.map((key) => obj[key]).join("-");
+            objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(
+                obj
+            );
+            return objectsByKeyValue;
+        }, {});
+    const newSearchResult = groupBy(["album_type"]);
+    if (searchResult) {
+        const obj = newSearchResult(searchResult);
+    }
     useEffect(() => {
         if (!input) {
             dispatch(actions.setSearchResult(null));
@@ -67,7 +79,7 @@ const Search = () => {
                     <>
                         <div>
                             <div className="flex flex-wrap items-center">
-                                <div className="sm:w-80 text-white md:w-80">
+                                <div className="sm:grow-1 sm:w-96 text-white md:grow-1">
                                     <div className="w-full pb-3">
                                         <h1 className="capitalize font-bold text-2xl text-white">
                                             Top result
@@ -77,8 +89,8 @@ const Search = () => {
                                         <div className="pb-5">
                                             <img
                                                 src={
-                                                    searchResult?.[0]
-                                                        ?.images?.[1].url
+                                                    searchResult?.[0].images[1]
+                                                        .url
                                                 }
                                                 alt={searchResult?.[0]?.name}
                                                 className="w-24 h-24 rounded-md"
@@ -105,13 +117,13 @@ const Search = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="flex-1 sm:w-full md:w-full lg:w-96 text-white">
+                                <div className="sm:flex-1 md:flex-1 lg:w-96 text-white">
                                     <div className="w-full pb-3">
                                         <h1 className="capitalize font-bold text-2xl text-white">
                                             songs
                                         </h1>
                                     </div>
-                                    Block 2
+                                    <div className="p-3">Block 1</div>
                                 </div>
                             </div>
                         </div>

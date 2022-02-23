@@ -1,6 +1,6 @@
 import React from "react";
 import Switch from "../Router/Switch";
-import SideBar from "../SideBar/SideBar";
+import SideBar from "../Sidebar/SideBar";
 
 const Layout = () => {
     return (
