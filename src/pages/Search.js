@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import Header from "../components/Header-components/Header";
 import { actions, useStore } from "../components/Store";
 
@@ -66,51 +65,53 @@ const Search = () => {
                 )}
                 {searchResult && (
                     <>
-                        <div to="" className="flex flex-wrap items-center">
-                            <div className="sm:w-80 text-white md:w-80">
-                                <div className="w-full pb-3">
-                                    <h1 className="capitalize font-bold text-2xl text-white">
-                                        Top result
-                                    </h1>
-                                </div>
-                                <Link
-                                    to=""
-                                    className="block rounded-md hover:bg-[#282828] px-3 py-5"
-                                >
-                                    <div className="pb-5">
-                                        <img
-                                            src={
-                                                searchResult?.[0]?.images?.[1]
-                                                    .url
-                                            }
-                                            alt={searchResult?.[0]?.name}
-                                            className="w-24 h-24 rounded-md"
-                                        />
-                                    </div>
-                                    <div className="pb-1">
-                                        <h1 className="text-2xl text-white font-bold">
-                                            {searchResult?.[0]?.name}
+                        <div>
+                            <div className="flex flex-wrap items-center">
+                                <div className="sm:grow-1 sm:w-96 text-white md:grow-1">
+                                    <div className="w-full pb-3">
+                                        <h1 className="capitalize font-bold text-2xl text-white">
+                                            Top result
                                         </h1>
                                     </div>
-                                    <div>
-                                        <p className="inline-block text-[#b3b3b3] hover:underline cursor-pointer pr-5">
-                                            {searchResult?.[0]?.artists.map(
-                                                (artist) => {
-                                                    return artist.name + ", ";
+                                    <div className="rounded-md hover:bg-[#282828] px-3 py-5">
+                                        <div className="pb-5">
+                                            <img
+                                                src={
+                                                    searchResult?.[0].images[1]
+                                                        .url
                                                 }
-                                            )}
-                                        </p>
-                                        <span className="text-white text-md font-bold rounded-full uppercase leading-[1rem] bg-[rgba(0,0,0,.2)] px-3">
-                                            {searchResult?.[0]?.album_type}
-                                        </span>
+                                                alt={searchResult?.[0]?.name}
+                                                className="w-24 h-24 rounded-md"
+                                            />
+                                        </div>
+                                        <div className="pb-1">
+                                            <h1 className="text-2xl text-white font-bold">
+                                                {searchResult?.[0]?.name}
+                                            </h1>
+                                        </div>
+                                        <div>
+                                            <p className="inline-block text-[#b3b3b3] hover:underline cursor-pointer pr-5">
+                                                {searchResult?.[0]?.artists.map(
+                                                    (artist) => {
+                                                        return (
+                                                            artist.name + ", "
+                                                        );
+                                                    }
+                                                )}
+                                            </p>
+                                            <span className="text-white text-md font-bold rounded-full uppercase leading-[1rem] bg-[rgba(0,0,0,.2)] px-3">
+                                                {searchResult?.[0]?.album_type}
+                                            </span>
+                                        </div>
                                     </div>
-                                </Link>
-                            </div>
-                            <div className="flex-1 sm:w-full md:w-full lg:w-96 text-white">
-                                <div className="w-full pb-3">
-                                    <h1 className="capitalize font-bold text-2xl text-white">
-                                        songs
-                                    </h1>
+                                </div>
+                                <div className="sm:flex-1 md:flex-1 lg:w-96 text-white">
+                                    <div className="w-full pb-3">
+                                        <h1 className="capitalize font-bold text-2xl text-white">
+                                            songs
+                                        </h1>
+                                    </div>
+                                    <div className="p-3">Block 1</div>
                                 </div>
                                 Block 2
                             </div>
