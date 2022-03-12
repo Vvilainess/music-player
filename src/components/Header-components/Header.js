@@ -13,19 +13,37 @@ const Header = ({ searchInput }) => {
     useEffect(() => {
         const getSearchResult = () => {
             getData(
-                `https://api.spotify.com/v1/search?q=${input}&type=album&include_external=audio?`,
+                `https://api.spotify.com/v1/search?q=${input}&type=album&include_external=audio?offset=0&limit=50`,
                 token,
                 "GET"
             ).then((response) => {
+                const groupBy = (keys) => (array) =>
+                    array.reduce((objectsByKeyValue, obj) => {
+                        const value = keys.map((key) => obj[key]).join("-");
+                        objectsByKeyValue[value] = (
+                            objectsByKeyValue[value] || []
+                        ).concat(obj);
+                        return objectsByKeyValue;
+                    }, {});
+                const newSearchResult = groupBy(["album_type"]);
+                const obj = newSearchResult(response.data.albums.items);
                 if (input) {
-                    dispatch(
-                        actions.setSearchResult(response.data.albums.items)
-                    );
+                    dispatch(actions.setSearchResult(obj));
                 }
+            });
+        };
+        const getArtist = () => {
+            getData(
+                `https://api.spotify.com/v1/search?q=${input}&type=artist&include_external=audio?offset=0&limit=6`,
+                token,
+                "GET"
+            ).then((response) => {
+                dispatch(actions.setArtist(response.data.artists.items));
             });
         };
         if (input) {
             getSearchResult();
+            getArtist();
         } else {
             dispatch(actions.setSearchResult(null));
         }

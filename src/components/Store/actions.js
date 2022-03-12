@@ -5,6 +5,8 @@ import {
     SET_CATEGORIES,
     SET_SEARCHRESULT,
     SET_INPUT,
+    SET_RECENTPLAYED,
+    SET_ARTISTS,
 } from "./constants";
 
 export const setToken = (payload) => ({
@@ -27,7 +29,15 @@ export const setSearchResult = (payload) => ({
     type: SET_SEARCHRESULT,
     payload,
 });
+export const setArtist = (payload) => ({
+    type: SET_ARTISTS,
+    payload,
+});
 export const setInput = (payload) => ({
     type: SET_INPUT,
+    payload,
+});
+export const setRecentPlayed = (payload) => ({
+    type: SET_RECENTPLAYED,
     payload,
 });

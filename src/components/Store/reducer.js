@@ -4,15 +4,19 @@ import {
     SET_PLAYLIST,
     SET_CATEGORIES,
     SET_SEARCHRESULT,
+    SET_RECENTPLAYED,
     SET_INPUT,
+    SET_ARTISTS,
 } from "./constants";
 
 const initialState = {
     token: "",
     user: {},
     playlist: [],
+    recentPlayed: {},
     input: "",
     searchResult: null,
+    artists: null,
     discovery_weekly: null,
     top_artists: null,
     playing: false,
@@ -36,6 +40,11 @@ function reducer(state, actions) {
                 ...state,
                 playlist: actions.payload,
             };
+        case SET_RECENTPLAYED:
+            return {
+                ...state,
+                recentPlayed: [...state, actions.payload],
+            };
         case SET_CATEGORIES:
             return {
                 ...state,
@@ -45,6 +54,11 @@ function reducer(state, actions) {
             return {
                 ...state,
                 searchResult: actions.payload,
+            };
+        case SET_ARTISTS:
+            return {
+                ...state,
+                artists: actions.payload,
             };
         case SET_INPUT:
             return {
