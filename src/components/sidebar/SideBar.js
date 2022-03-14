@@ -4,9 +4,10 @@ import * as BiIcons from "react-icons/bi";
 import * as AiIcons from "react-icons/ai";
 import * as BsIcons from "react-icons/bs";
 import { useStore } from "../Store";
+import createPlaylist from "../Auth/getTokenFromUrl";
 
 const Sidebar = () => {
-    const [{ playlist }, dispatch] = useStore();
+    const [{ playlist, token }, dispatch] = useStore();
     const [isActiveTab, setIsActiveTab] = useState(1);
     const handleTab = (idx) => {
         setIsActiveTab(idx);
@@ -79,6 +80,10 @@ const Sidebar = () => {
                             to="/playlist"
                             onClick={() => {
                                 handleTab(4);
+                                createPlaylist(
+                                    "https://api.spotify.com/v1/users/31hqgkyccfx6rsbwx5r5nght5ngy/playlists",
+                                    token
+                                );
                             }}
                             className="flex items-center justify-start"
                         >

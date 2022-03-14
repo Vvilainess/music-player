@@ -11,7 +11,7 @@ const Search = () => {
         if (!input) {
             dispatch(actions.setSearchResult(null));
         }
-    }, [searchResult, dispatch]);
+    }, [searchResult, input, artists, categories, dispatch]);
     return (
         <div className="relative bg-[#121212]">
             <Header searchInput={true} />
@@ -46,7 +46,7 @@ const Search = () => {
                                         key={idx}
                                         className={
                                             `after:bg-[#${randomColor}] ` +
-                                            "relative truncate rounded-md cursor-pointer after:bg-black after:content-[''] after:pb-[100%] after:block"
+                                            "relative truncate rounded-md shadow-lg shadow-black cursor-pointer after:bg-[#181818] after:hover:bg-[#282828] after:content-[''] after:pb-[100%] after:block"
                                         }
                                     >
                                         <div>
@@ -178,7 +178,7 @@ const Search = () => {
                                                     key={items.id}
                                                     className="rounded-md inline-block mr-5 mb-5 bg-[#181818] hover:bg-[#282828] transition ease-in duration-150 cursor-pointer"
                                                 >
-                                                    <div className="px-5 py-7 w-44">
+                                                    <div className="px-5 py-7 w-44 shadow-lg shadow-black">
                                                         <div className="relative pb-1">
                                                             <div className="rounded-full relative pb-[100%] w-full">
                                                                 <div>
@@ -228,7 +228,7 @@ const Search = () => {
                                                         key={items.id}
                                                         className="rounded-md inline-block mr-5 mb-5 max-h-[250px] text-ellipsis truncate bg-[#181818] hover:bg-[#282828] transition ease-in duration-150 cursor-pointer"
                                                     >
-                                                        <div className="px-5 py-7 w-44">
+                                                        <div className="px-5 py-7 w-44 shadow-lg shadow-black">
                                                             <div className="relative pb-1">
                                                                 <div className="rounded-full relative pb-[100%] w-full">
                                                                     <div>

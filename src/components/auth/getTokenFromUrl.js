@@ -13,6 +13,8 @@ const SCOPES = [
     "user-top-read",
     "user-modify-playback-state",
     "playlist-read-private",
+    "playlist-modify-private",
+    "playlist-modify-public",
 ];
 const SCOPES_URL_PARAMS = SCOPES.join(SPACER);
 
@@ -44,6 +46,21 @@ const getCategories = (endpoint, token) => {
         })
         .catch((error) => console.log(error));
 };
-export { getPlaylist, getCategories };
+const createPlaylist = (endpoint, token) => {
+    return axios
+        .post(endpoint, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: {
+                name: "New Playlist",
+                description: "New playlist description",
+                public: false,
+            },
+        })
+        .catch((error) => console.log(error));
+};
+export { getPlaylist, getCategories, createPlaylist };
 export const accessUrl = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${spotifyAuth.ClientId}&redirect_uri=${spotifyAuth.RedirectUri}&scope=${SCOPES_URL_PARAMS}&response_type=token&show_dialog=true`;
 export default getTokenFromUrl;

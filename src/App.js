@@ -27,7 +27,6 @@ function App() {
                         `https://api.spotify.com/v1/me/playlists`,
                         access_token
                     ).then((response) => {
-                        console.log(response.data);
                         const { items } = response.data;
                         dispatch(actions.setPlaylist(items));
                     })
