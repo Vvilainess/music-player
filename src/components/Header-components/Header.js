@@ -5,7 +5,7 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import getData from "../GetAPI/Axios";
 
-const Header = ({ searchInput }) => {
+const Header = ({ searchInput, background }) => {
     const [{ user, token, input }, dispatch] = useStore();
     const handleInput = (e) => {
         dispatch(actions.setInput(e.target.value));
@@ -49,7 +49,20 @@ const Header = ({ searchInput }) => {
         }
     }, [input, dispatch]);
     return (
-        <div className="sticky bg-[#101010] h-[64px] flex justify-between items-center">
+        <div
+            className={
+                `${background} ` +
+                "sticky h-[64px] flex justify-between items-center"
+            }
+        >
+            <div className="flex items-center justify-between">
+                <div className="rounded-full bg-black w-5 leading-3 cursor-pointer">
+                    <IoIcons.IoIosArrowBack className="text-white font-bold text-2xl" />
+                </div>
+                <div className="rounded-full bg-black w-5 leading-3 cursor-pointer">
+                    <IoIcons.IoIosArrowForward className="text-white font-bold text-2xl" />
+                </div>
+            </div>
             {searchInput ? (
                 <>
                     <form autoComplete="off" className="ml-11 relative">

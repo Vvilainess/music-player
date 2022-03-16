@@ -14,7 +14,7 @@ const Search = () => {
     }, [searchResult, input, artists, categories, dispatch]);
     return (
         <div className="relative bg-[#121212]">
-            <Header searchInput={true} />
+            <Header searchInput={true} background="bg-[#101010]" />
             <div className="px-9 py-7">
                 {!searchResult?.album?.[0] && input && (
                     <div className="w-full h-screen top-0 right-0 bottom-0">
