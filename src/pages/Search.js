@@ -50,9 +50,9 @@ const Search = () => {
                                         }
                                     >
                                         <div>
-                                            <p className="block absolute box-border text-white text-xl font-bold break-words max-w-full top-0 left-0 p-2">
+                                            <div className="block absolute truncate box-border text-white text-xl font-bold break-words max-w-full top-0 left-0 p-2">
                                                 {category.name}
-                                            </p>
+                                            </div>
                                             <img
                                                 src={category.icons?.[0].url}
                                                 alt=""
@@ -226,9 +226,9 @@ const Search = () => {
                                                 <>
                                                     <div
                                                         key={items.id}
-                                                        className="rounded-md inline-block mr-5 mb-5 max-h-[250px] text-ellipsis truncate bg-[#181818] hover:bg-[#282828] transition ease-in duration-150 cursor-pointer"
+                                                        className="rounded-md inline-block mr-5 mb-5 max-h-[250px] text-ellipsis truncate bg-[#181818] hover:bg-[#282828] transition ease-in duration-150 cursor-pointer shadow-lg shadow-black"
                                                     >
-                                                        <div className="px-5 py-7 w-44 shadow-lg shadow-black">
+                                                        <div className="px-5 py-7 w-44">
                                                             <div className="relative pb-1">
                                                                 <div className="rounded-full relative pb-[100%] w-full">
                                                                     <div>

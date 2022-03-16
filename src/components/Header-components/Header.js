@@ -4,6 +4,7 @@ import LoginBtn from "../Feature-components/LoginBtn";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import getData from "../GetAPI/Axios";
+import { BrowserRouter, Router } from "react-router-dom";
 
 const Header = ({ searchInput, background }) => {
     const [{ user, token, input }, dispatch] = useStore();
@@ -47,7 +48,7 @@ const Header = ({ searchInput, background }) => {
         } else {
             dispatch(actions.setSearchResult(null));
         }
-    }, [input, dispatch]);
+    }, [input, token, dispatch]);
     return (
         <div
             className={
@@ -55,17 +56,22 @@ const Header = ({ searchInput, background }) => {
                 "sticky h-[64px] flex justify-between items-center"
             }
         >
-            <div className="flex items-center justify-between">
-                <div className="rounded-full bg-black w-5 leading-3 cursor-pointer">
+            <div className="absolute flex items-center justify-between w-16 ml-3">
+                <div
+                    className="rounded-full bg-black p-1 cursor-pointer mr-3"
+                    onClick={() => {
+                        Router.History.back();
+                    }}
+                >
                     <IoIcons.IoIosArrowBack className="text-white font-bold text-2xl" />
                 </div>
-                <div className="rounded-full bg-black w-5 leading-3 cursor-pointer">
+                <div className="rounded-full bg-black p-1 cursor-pointer">
                     <IoIcons.IoIosArrowForward className="text-white font-bold text-2xl" />
                 </div>
             </div>
             {searchInput ? (
                 <>
-                    <form autoComplete="off" className="ml-11 relative">
+                    <form autoComplete="off" className="ml-24 relative">
                         <input
                             value={input}
                             onChange={(e) => {
