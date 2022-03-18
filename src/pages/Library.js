@@ -15,7 +15,7 @@ const Library = () => {
                         Playlists
                     </h1>
                 </div>
-                <div className="relative grid-cols-7">
+                <div className="relative sm:grid-cols-2 md:grid-cols-7 lg:grid-cols-9">
                     <div className="relative rounded-md bg-gradient-to-r from-violet-500 to-fuchsia-500">
                         <div className="px-5">
                             <h1 className="text-white font-bold text-2xl">
