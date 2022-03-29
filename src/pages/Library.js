@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header-components/Header";
 import { actions, useStore } from "../components/Store";
+import * as FaIcons from "react-icons/fa";
 
 const Library = () => {
     const [{ playlist }, dispatch] = useStore();
     console.log(playlist);
+
+    useEffect(() => {}, []);
 
     return (
         <div className="relative bg-[#101010]">
@@ -31,7 +34,7 @@ const Library = () => {
                         return (
                             <div
                                 key={playlist.id}
-                                className="rounded-md inline-block bg-[#181818] hover:bg-[#282828] transition ease-in duration-150 cursor-pointer"
+                                className="group hover:group rounded-md inline-block bg-[#181818] hover:bg-[#282828] transition ease-in duration-400 cursor-pointer"
                             >
                                 <div className="px-5 py-7 shadow-lg shadow-black">
                                     <div className="relative pb-1">
@@ -60,12 +63,17 @@ const Library = () => {
                                                             <path
                                                                 d="M16 7.494v28.362A8.986 8.986 0 0 0 9 32.5c-4.962 0-9 4.038-9 9s4.038 9 9 9 9-4.038 9-9V9.113l30-6.378v27.031a8.983 8.983 0 0 0-7-3.356c-4.962 0-9 4.038-9 9 0 4.963 4.038 9 9 9s9-4.037 9-9V.266L16 7.494zM9 48.5c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7c0 3.859-3.141 7-7 7zm32-6.09c-3.86 0-7-3.14-7-7 0-3.859 3.14-7 7-7s7 3.141 7 7c0 3.861-3.141 7-7 7z"
                                                                 fill="currentColor"
-                                                                fill-rule="evenodd"
+                                                                fillRule="evenodd"
                                                             ></path>
                                                         </svg>
                                                     </div>
                                                 )}
                                             </div>
+                                        </div>
+                                        <div className="absolute bottom-3 right-3 bg-green-600 px-4 py-4 rounded-full opacity-0 transition duration-200 ease-in-out group-hover:transform group-hover:translate-y--8 group-hover:opacity-100">
+                                            <button className="relative z-1">
+                                                <FaIcons.FaPlay />
+                                            </button>
                                         </div>
                                     </div>
                                     <div className="pt-5">
