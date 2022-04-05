@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Header from "../components/Header-components/Header";
 import { actions, useStore } from "../components/Store";
 import * as FaIcons from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Library = () => {
     const [{ playlist }, dispatch] = useStore();
@@ -42,9 +43,13 @@ const Library = () => {
 
                     {playlist?.map((playlist) => {
                         return (
-                            <div
+                            <Link
+                                to={`/playlist/${playlist.id}`}
                                 key={playlist.id}
                                 className="group hover:group rounded-md inline-block bg-[#181818] hover:bg-[#282828] transition ease-in duration-400 cursor-pointer"
+                                onClick={() => {
+                                    console.log(playlist.id);
+                                }}
                             >
                                 <div className="px-5 py-7 shadow-lg shadow-black">
                                     <div className="relative pb-1">
@@ -101,7 +106,7 @@ const Library = () => {
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         );
                     })}
                     <div></div>
