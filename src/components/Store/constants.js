@@ -6,3 +6,4 @@ export const SET_SEARCHRESULT = "set_result";
 export const SET_INPUT = "set_input";
 export const SET_RECENTPLAYED = "set_recentplayed";
 export const SET_ARTISTS = "set_artists";
+export const SET_PLAYLISTDETAIL = "set_playlistdetail";

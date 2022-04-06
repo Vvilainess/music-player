@@ -7,6 +7,7 @@ import {
     SET_INPUT,
     SET_RECENTPLAYED,
     SET_ARTISTS,
+    SET_PLAYLISTDETAIL,
 } from "./constants";
 
 export const setToken = (payload) => ({
@@ -39,5 +40,9 @@ export const setInput = (payload) => ({
 });
 export const setRecentPlayed = (payload) => ({
     type: SET_RECENTPLAYED,
+    payload,
+});
+export const setPlaylistDetail = (payload) => ({
+    type: SET_PLAYLISTDETAIL,
     payload,
 });

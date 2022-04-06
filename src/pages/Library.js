@@ -4,9 +4,10 @@ import { actions, useStore } from "../components/Store";
 import * as FaIcons from "react-icons/fa";
 import { Link } from "react-router-dom";
 import getData from "../components/GetAPI/Axios";
+import PlaylistItem from "../components/Utils/Playlist/PlaylistItem";
 
 const Library = () => {
-    const [{ playlist, token }, dispatch] = useStore();
+    const [{ playlist }] = useStore();
     console.log(playlist);
 
     useEffect(() => {}, []);
@@ -42,9 +43,15 @@ const Library = () => {
                         </div>
                     </div>
 
-                    {playlist?.map((playlist) => {
+                    {playlist?.map((playlistItem) => {
+                        console.log(playlistItem);
                         return (
-                            <Link
+                            <PlaylistItem
+                                key={playlistItem.id}
+                                playlist={playlistItem}
+                            />
+
+                            /* <Link
                                 to={`/playlist/${playlist.id}`}
                                 state={{
                                     images: playlist.images,
@@ -119,7 +126,7 @@ const Library = () => {
                                         </p>
                                     </div>
                                 </div>
-                            </Link>
+                            </Link> */
                         );
                     })}
                     <div></div>
