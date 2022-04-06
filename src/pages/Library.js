@@ -42,9 +42,16 @@ const Library = () => {
                     </div>
 
                     {playlist?.map((playlist) => {
+                        console.log(playlist.name);
                         return (
                             <Link
                                 to={`/playlist/${playlist.id}`}
+                                state={{
+                                    images: playlist.images,
+                                    owner: playlist.owner,
+                                    color: playlist.primary_color,
+                                    name: playlist.name,
+                                }}
                                 key={playlist.id}
                                 className="group hover:group rounded-md inline-block bg-[#181818] hover:bg-[#282828] transition ease-in duration-400 cursor-pointer"
                                 onClick={() => {

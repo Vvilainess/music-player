@@ -54,7 +54,7 @@ const Header = ({ searchInput, background }) => {
             className={
                 background +
                 " " +
-                "sticky h-[64px] flex justify-between items-center z-2"
+                "sticky h-[64px] flex justify-between items-center z-10"
             }
         >
             <div className="absolute flex items-center justify-between w-16 ml-3">
