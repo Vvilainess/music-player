@@ -1,6 +1,8 @@
 import React from "react";
 import Header from "../components/Header-components/Header";
 import { Link, useLocation, useParams } from "react-router-dom";
+import * as FaIcons from "react-icons/fa";
+import * as BsIcons from "react-icons/bs";
 
 const PlaylistItem = (props) => {
     const { type } = useParams();
@@ -9,11 +11,11 @@ const PlaylistItem = (props) => {
     const playlistColor = useLocation().state.color;
     const playlistName = useLocation().state.name;
     console.log("Props Parameter Value: " + type);
-    console.log(playlistOwner.external_urls.spotify);
+    console.log(playlistColor);
     return (
         <>
-            <Header />
-            <div className="relative top-[-64px] left-0 h-full w-full bg-gradient-to-b from-[#555] to-[#2b2b2b] z-1">
+            <div className="relative top-0 left-0 h-full w-full bg-gradient-to-b from-[#555] to-[#2b2b2b] z-1">
+                <Header />
                 <div className="flex flex-row flex-1 justify-between h-[30vh] max-h-[500px] min-h-[350px]">
                     <div className="flex">
                         <div className="relative flex items-end justify-items-center">
@@ -59,6 +61,52 @@ const PlaylistItem = (props) => {
                             >
                                 {playlistOwner.display_name}
                             </Link>
+                        </div>
+                    </div>
+                </div>
+                <div className="relative bg-[#121212] isolate">
+                    <div
+                        style={{ backgroundColor: "rgb(224,224,224)" }}
+                        className="absolute h-[232px] w-full bg-gradient-to-b from-[rgba(0,0,0,.6)] to-[#121212] -z-10 "
+                    ></div>
+                    <div className="relative flex flex-row items-center px-4 py-6">
+                        <div className="flex flex-row items-center mr-8 cursor-pointer group">
+                            <div className="relative rounded-full bg-[#1ed760] inline-block p-4 group-hover:scale-110 transition duration-150">
+                                <span>
+                                    <FaIcons.FaPlay />
+                                </span>
+                            </div>
+                        </div>
+                        <div className="cursor-pointer">
+                            <div>
+                                <span>
+                                    <BsIcons.BsThreeDots className="text-[#b3b3b3] text-2xl hover:text-white" />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="px-5">
+                        <div className="grid grid-cols-">
+                            <div
+                                className="grid gap-4" /* "flex flex-row items-center justify-between" */
+                                style={{
+                                    gridTemplateColumns:
+                                        "[index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px,1fr)",
+                                }}
+                            >
+                                <div className="text-white text-lg">#</div>
+                                <div className="text-white text-lg">title</div>
+                                <div className="text-white text-lg">Album</div>
+                                <div className="text-white text-lg">
+                                    Date Added
+                                </div>
+                                <div className="text-white text-lg">
+                                    <span>
+                                        <BsIcons.BsClock />
+                                    </span>
+                                </div>
+                            </div>
+                            <div></div>
                         </div>
                     </div>
                 </div>
