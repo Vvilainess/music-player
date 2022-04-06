@@ -3,9 +3,10 @@ import Header from "../components/Header-components/Header";
 import { actions, useStore } from "../components/Store";
 import * as FaIcons from "react-icons/fa";
 import { Link } from "react-router-dom";
+import getData from "../components/GetAPI/Axios";
 
 const Library = () => {
-    const [{ playlist }, dispatch] = useStore();
+    const [{ playlist, token }, dispatch] = useStore();
     console.log(playlist);
 
     useEffect(() => {}, []);
@@ -42,7 +43,6 @@ const Library = () => {
                     </div>
 
                     {playlist?.map((playlist) => {
-                        console.log(playlist.name);
                         return (
                             <Link
                                 to={`/playlist/${playlist.id}`}
@@ -55,7 +55,13 @@ const Library = () => {
                                 key={playlist.id}
                                 className="group hover:group rounded-md inline-block bg-[#181818] hover:bg-[#282828] transition ease-in duration-400 cursor-pointer"
                                 onClick={() => {
-                                    console.log(playlist.id);
+                                    getData(
+                                        `https://api.spotify.com/v1/playlists/${playlist.id}/tracks`,
+                                        token,
+                                        "GET"
+                                    ).then((res) => {
+                                        console.log(res);
+                                    });
                                 }}
                             >
                                 <div className="px-5 py-7 shadow-lg shadow-black">
