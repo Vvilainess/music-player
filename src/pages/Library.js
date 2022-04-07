@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import Header from "../components/Header-components/Header";
-import { actions, useStore } from "../components/Store";
+import { useStore } from "../components/Store";
 import PlaylistItem from "../components/Utils/Playlist/PlaylistItem";
 import LikedList from "../components/Utils/Playlist/LikedList";
 
 const Library = () => {
     const [{ playlist }] = useStore();
-    console.log(playlist);
-
     useEffect(() => {}, [playlist]);
-
     return (
         <div className="relative bg-[#101010]">
             <Header background={"bg-transparient"} />

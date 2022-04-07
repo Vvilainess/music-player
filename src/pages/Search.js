@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import Header from "../components/Header-components/Header";
 import { actions, useStore } from "../components/Store";
+import CategoryItem from "../components/Utils/Category/CategoryItem";
+import SearchResultItem from "../components/Utils/SearchResultItem";
+import Track from "../components/Utils/Track/Track";
 
 const Search = () => {
     const [{ categories, searchResult, input, artists }, dispatch] = useStore();
@@ -38,28 +40,11 @@ const Search = () => {
                         </div>
                         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 sm:gap-5 md:gap-4 lg:gap-5">
                             {categories.map((category, idx) => {
-                                var randomColor = Math.floor(
-                                    Math.random() * 16777215
-                                ).toString(16);
                                 return (
-                                    <div
+                                    <CategoryItem
+                                        category={category}
                                         key={idx}
-                                        className={
-                                            `after:bg-[#${randomColor}] ` +
-                                            "relative truncate rounded-md shadow-lg shadow-black cursor-pointer after:bg-[#181818] after:hover:bg-[#282828] after:content-[''] after:pb-[100%] after:block"
-                                        }
-                                    >
-                                        <div>
-                                            <div className="block absolute truncate box-border text-white text-xl font-bold break-words max-w-full top-0 left-0 p-2">
-                                                {category.name}
-                                            </div>
-                                            <img
-                                                src={category.icons?.[0].url}
-                                                alt=""
-                                                className="absolute origin-center rotate-[25deg] translate-x-[18%] translate-y-[-2%] w-24 h-24 right-0 bottom-0 m-0"
-                                            />
-                                        </div>
-                                    </div>
+                                    />
                                 );
                             })}
                         </div>
@@ -125,40 +110,10 @@ const Search = () => {
                                         ?.slice(0, 4)
                                         .map((single) => {
                                             return (
-                                                <Link
-                                                    to="#"
+                                                <Track
                                                     key={single.id}
-                                                    className="p-1 flex items-center flex-start rounded-md hover:bg-[#282828]"
-                                                >
-                                                    <img
-                                                        src={
-                                                            single.images[2].url
-                                                        }
-                                                        alt={single.name}
-                                                        className="inline-block w-11 h-11"
-                                                    />
-                                                    <div className="pl-4">
-                                                        <p>{single.name}</p>
-                                                        <p>
-                                                            {single.artists.map(
-                                                                (artist) => {
-                                                                    return (
-                                                                        <Link
-                                                                            key={
-                                                                                artist.id
-                                                                            }
-                                                                            to="#"
-                                                                            className="text-[#b3b3b3] text-base hover:underline"
-                                                                        >
-                                                                            {artist.name +
-                                                                                ", "}
-                                                                        </Link>
-                                                                    );
-                                                                }
-                                                            )}
-                                                        </p>
-                                                    </div>
-                                                </Link>
+                                                    single={single}
+                                                />
                                             );
                                         })}
                                 </div>
@@ -170,65 +125,12 @@ const Search = () => {
                                     Artists
                                 </h1>
                                 <div className="flex flex-row flex-wrap contents-start px-3 py-4">
-                                    {artists?.map((items, idx) => {
-                                        console.log(items);
+                                    {artists?.map((item, idx) => {
                                         return (
-                                            <>
-                                                <div
-                                                    key={items.id}
-                                                    className="rounded-md inline-block mr-5 mb-5 bg-[#181818] hover:bg-[#282828] transition ease-in duration-150 cursor-pointer"
-                                                >
-                                                    <div className="px-5 py-7 w-44 shadow-lg shadow-black">
-                                                        <div className="relative pb-1">
-                                                            <div className="rounded-full relative pb-[100%] w-full">
-                                                                <div>
-                                                                    {items
-                                                                        ?.images?.[0]
-                                                                        ?.url ? (
-                                                                        <img
-                                                                            src={
-                                                                                items
-                                                                                    ?.images?.[0]
-                                                                                    ?.url
-                                                                            }
-                                                                            alt={
-                                                                                items.name
-                                                                            }
-                                                                            className="absolute rounded-full left-0 top-0 w-full h-full shadow-lg shadow-black"
-                                                                        />
-                                                                    ) : (
-                                                                        <div className="absolute rounded-full left-0 top-0 w-full h-full shadow-lg shadow-black">
-                                                                            <svg
-                                                                                height="64"
-                                                                                role="img"
-                                                                                width="64"
-                                                                                viewBox="-20 -25 100 100"
-                                                                                className="UB3cP9wsqoAMAHaeBGDt cTYewTys80cdIcEk9dI2 absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] text-white"
-                                                                                aria-hidden="true"
-                                                                                data-testid="card-image-fallback"
-                                                                            >
-                                                                                <path
-                                                                                    d="M16 7.494v28.362A8.986 8.986 0 0 0 9 32.5c-4.962 0-9 4.038-9 9s4.038 9 9 9 9-4.038 9-9V9.113l30-6.378v27.031a8.983 8.983 0 0 0-7-3.356c-4.962 0-9 4.038-9 9 0 4.963 4.038 9 9 9s9-4.037 9-9V.266L16 7.494zM9 48.5c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7c0 3.859-3.141 7-7 7zm32-6.09c-3.86 0-7-3.14-7-7 0-3.859 3.14-7 7-7s7 3.141 7 7c0 3.861-3.141 7-7 7z"
-                                                                                    fill="currentColor"
-                                                                                    fill-rule="evenodd"
-                                                                                ></path>
-                                                                            </svg>
-                                                                        </div>
-                                                                    )}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="pt-5">
-                                                            <div className="text-white font-md font-bold truncate">
-                                                                {items.name}
-                                                            </div>
-                                                            <p className="text-[#b3b3b3] font-xs capitalize">
-                                                                {items.type}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </>
+                                            <SearchResultItem
+                                                key={idx}
+                                                item={item}
+                                            />
                                         );
                                     })}
                                 </div>
@@ -242,43 +144,12 @@ const Search = () => {
                                 <div className="flex flex-row flex-wrap content-start px-3 py-4">
                                     {searchResult?.album
                                         ?.slice(1, 7)
-                                        .map((items) => {
-                                            console.log(items);
+                                        .map((item) => {
                                             return (
-                                                <>
-                                                    <div
-                                                        key={items.id}
-                                                        className="rounded-md inline-block mr-5 mb-5 max-h-[250px] text-ellipsis truncate bg-[#181818] hover:bg-[#282828] transition ease-in duration-150 cursor-pointer shadow-lg shadow-black"
-                                                    >
-                                                        <div className="px-5 py-7 w-44">
-                                                            <div className="relative pb-1">
-                                                                <div className="rounded-full relative pb-[100%] w-full">
-                                                                    <div>
-                                                                        <img
-                                                                            src={
-                                                                                items
-                                                                                    .images[0]
-                                                                                    .url
-                                                                            }
-                                                                            alt={
-                                                                                items.name
-                                                                            }
-                                                                            className="absolute rounded-full left-0 top-0 w-full h-full shadow-lg shadow-black"
-                                                                        />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div className="pt-5">
-                                                                <div className="text-white font-md font-bold truncate">
-                                                                    {items.name}
-                                                                </div>
-                                                                <p className="text-[#b3b3b3] font-xs capitalize">
-                                                                    {items.type}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </>
+                                                <SearchResultItem
+                                                    key={item.id}
+                                                    item={item}
+                                                />
                                             );
                                         })}
                                 </div>
