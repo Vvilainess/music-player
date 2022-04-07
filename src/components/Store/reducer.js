@@ -44,6 +44,7 @@ function reducer(state, actions) {
             };
         case SET_PLAYLISTDETAIL:
             return {
+                ...state,
                 playlistDetail: actions.payload,
             };
         case SET_RECENTPLAYED:

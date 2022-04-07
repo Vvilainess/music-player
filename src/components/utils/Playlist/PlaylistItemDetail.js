@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../../Header-components/Header";
 import { useStore } from "../../Store";
 import { Link, useLocation } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as BsIcons from "react-icons/bs";
 
-const PlaylistItemDetail = (props) => {
+const PlaylistItemDetail = () => {
     const [{ playlistDetail }] = useStore();
     console.log(playlistDetail);
-    /* const { type } = useParams(); */
     const playlistOwner = useLocation().state.owner;
     const playlistImage = useLocation().state.images;
-    /* const playlistColor = useLocation().state.color; */
     const playlistName = useLocation().state.name;
+    useEffect(() => {}, [playlistDetail]);
     return (
         <>
             <div className="relative top-0 left-0 h-full w-full bg-gradient-to-b from-[#555] to-[#2b2b2b] z-1">

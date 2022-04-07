@@ -4,7 +4,7 @@ import LoginBtn from "../Feature-components/LoginBtn";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import getData from "../GetAPI/Axios";
-import { BrowserRouter, Router } from "react-router-dom";
+import { Router } from "react-router-dom";
 
 const Header = ({ searchInput, background }) => {
     const [{ user, token, input }, dispatch] = useStore();

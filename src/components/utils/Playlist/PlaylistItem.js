@@ -5,9 +5,8 @@ import getData from "../../GetAPI/Axios";
 import * as FaIcons from "react-icons/fa";
 
 const PlaylistItem = ({ playlist }) => {
-    console.log(playlist.id);
     const [{ token }, dispatch] = useStore();
-    useEffect(() => {}, []);
+    useEffect(() => {}, [token, dispatch]);
     return (
         <Link
             to={"/playlist" + "/" + playlist.id}
@@ -18,14 +17,14 @@ const PlaylistItem = ({ playlist }) => {
                     token,
                     "GET"
                 ).then((res) => {
-                    console.log(res.data);
-                    dispatch(actions.setPlaylistDetail(res.data));
+                    if (res.data) {
+                        dispatch(actions.setPlaylistDetail(res.data));
+                    }
                 });
             }}
             state={{
                 images: playlist.images,
                 owner: playlist.owner,
-                color: playlist.primary_color,
                 name: playlist.name,
             }}
         >
