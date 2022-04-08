@@ -3,19 +3,20 @@ import { Link } from "react-router-dom";
 import * as BiIcons from "react-icons/bi";
 import * as AiIcons from "react-icons/ai";
 import * as BsIcons from "react-icons/bs";
+import * as IoIcons from "react-icons/io";
 import { useStore } from "../Store";
 import createPlaylist from "../Auth/getTokenFromUrl";
 
 const Sidebar = () => {
-    const [{ playlist, token }, dispatch] = useStore();
+    const [{ playlist, token }] = useStore();
     const [isActiveTab, setIsActiveTab] = useState(1);
     const handleTab = (idx) => {
         setIsActiveTab(idx);
     };
     useEffect(() => {}, [playlist]);
     return (
-        <div className="fixed w-[241px] h-screen bg-black pl-5 py-5 mr-3">
-            <Link to="/" className="flex items-center justify-start">
+        <div className="fixed flex flex-col w-[241px] h-screen bg-black pt-6 mr-3">
+            <Link to="/" className="flex items-center justify-start px-5">
                 <BsIcons.BsSpotify className="text-4xl text-white inline-block mr-1" />
                 <p className="text-white text-2xl font-bold inline-block">
                     Spotify
@@ -23,7 +24,7 @@ const Sidebar = () => {
             </Link>
             <div className="pt-5 pb-3">
                 <ul>
-                    <li className="flex items-center pb-3">
+                    <li className="flex items-center pb-3 px-5">
                         <Link
                             to="/"
                             onClick={() => {
@@ -41,7 +42,7 @@ const Sidebar = () => {
                             </p>
                         </Link>
                     </li>
-                    <li className="flex items-center pb-3">
+                    <li className="flex items-center pb-3 px-5">
                         <Link
                             to="/search"
                             className={
@@ -57,7 +58,7 @@ const Sidebar = () => {
                             <p className="capitalize pl-4 font-bold">Search</p>
                         </Link>
                     </li>
-                    <li className="flex items-center pb-3">
+                    <li className="flex items-center pb-3 px-5">
                         <Link
                             to="/collection/playlist"
                             className={
@@ -75,7 +76,7 @@ const Sidebar = () => {
                     </li>
                 </ul>
                 <ul className="mt-5">
-                    <li className="pr-2 py-3">
+                    <li className="px-5 py-3 shadow-lg shadow-black z-10">
                         <Link
                             to="/playlist"
                             onClick={() => {
@@ -101,7 +102,7 @@ const Sidebar = () => {
                             </p>
                         </Link>
                     </li>
-                    <li className="pr-2 py-1">
+                    <li className="px-5 py-1">
                         <Link
                             to="/collection/playlist"
                             onClick={() => {
@@ -125,20 +126,41 @@ const Sidebar = () => {
                     </li>
                 </ul>
             </div>
-            <div className="w-[80%] h-[1px] bg-[#7c7c7c]"></div>
-            <div className="pt-2 pb-2">
-                {playlist.map((list, idx) => {
+            <div className="relative w-[80%] h-[1px] bg-[#7c7c7c] mx-5 shadow-lg shadow-black">
+                <div className="absolute h-[16px] bottom-[-16px] left-0 right-0 bg-gradient-to-t from-[rgba(0,0,0,.7)] to-[transparient] z-10"></div>
+            </div>
+            <div className="pt-2 pb-2 flex-1 overflow-y-scroll mr-1">
+                {playlist.map((playlist, idx) => {
+                    console.log(playlist);
                     return (
-                        <div key={idx} className="pt-1 pb-1">
+                        <div key={idx} className="pt-1 pb-1 px-5">
                             <Link
-                                to=""
+                                to={`/playlist/${playlist.id}`}
+                                state={{
+                                    images: playlist.images,
+                                    owner: playlist.owner,
+                                    name: playlist.name,
+                                }}
                                 className="text-[#b3b3b3] hover:text-white break-words text-sm"
                             >
-                                {list?.name}
+                                {playlist?.name}
                             </Link>
                         </div>
                     );
                 })}
+            </div>
+            <div className="relative left-0 bottom-0 bg-black z-10">
+                <div className="px-0 py-[8px]">
+                    <Link
+                        to="/"
+                        className="flex flex-row justify-center items-center"
+                    >
+                        <IoIcons.IoMdDownload className="text-white font-bold mr-2" />
+                        <span className="text-white font-bold capitalize">
+                            Install App
+                        </span>
+                    </Link>
+                </div>
             </div>
         </div>
     );

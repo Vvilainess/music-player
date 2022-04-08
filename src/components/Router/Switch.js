@@ -15,6 +15,7 @@ const Switch = () => {
             <Route path="/playlist" element={<CreatePlaylist />} />
             <Route path="/collection/tracks" element={<LikedSongs />} />
             <Route path="/playlist/:id" element={<PlaylistItemDetail />} />
+            <Route path="/download" element={<Home />} />
         </Routes>
     );
 };
