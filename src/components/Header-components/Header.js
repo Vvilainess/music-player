@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import { actions, useStore } from "../Store";
 import LoginBtn from "../Feature-components/LoginBtn";
 import * as AiIcons from "react-icons/ai";
@@ -18,10 +18,9 @@ const Header = ({ searchInput, background }) => {
             timerId = setTimeout(() => fn(...args), delay);
         };
     };
-    const handleSubmitSearch = () => {};
-    const getSearchResult = () => {
+    const getSearchResult = ({ inputValue }) => {
         getData(
-            `https://api.spotify.com/v1/search?q=${input}&type=album&include_external=audio?offset=0&limit=50`,
+            `https://api.spotify.com/v1/search?q=${inputValue}&type=album&include_external=audio?offset=0&limit=50`,
             token,
             "GET"
         ).then((response) => {
@@ -40,8 +39,11 @@ const Header = ({ searchInput, background }) => {
             }
         });
     };
-    const debouncedHandler = useCallback(debounce(handleInput, 200), []);
+    const handleSubmitSearch = (input) => {
+        debounce(getSearchResult(input), 1000);
+    };
     useEffect(() => {
+        console.log(obj);
         const getArtist = () => {
             getData(
                 `https://api.spotify.com/v1/search?q=${input}&type=artist&include_external=audio?offset=0&limit=6`,
@@ -54,7 +56,7 @@ const Header = ({ searchInput, background }) => {
             });
         };
         if (input) {
-            getSearchResult();
+            /* getSearchResult(); */
             getArtist();
         } else {
             dispatch(actions.setSearchResult(null));
@@ -87,7 +89,8 @@ const Header = ({ searchInput, background }) => {
                         <input
                             value={input}
                             onChange={(e) => {
-                                debouncedHandler(e.target.value);
+                                handleInput(e);
+                                handleSubmitSearch(e.target.value);
                             }}
                             type="text"
                             name="search"
