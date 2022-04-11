@@ -1,10 +1,10 @@
 import React from "react";
 
 const CategoryItem = ({ category }) => {
+    console.log(category);
     return (
         <div
             className={
-                /* `after:bg-[#${randomColor}] ` + */
                 "relative truncate rounded-md shadow-lg shadow-black cursor-pointer after:bg-[#181818] after:hover:bg-[#282828] after:content-[''] after:pb-[100%] after:block"
             }
         >

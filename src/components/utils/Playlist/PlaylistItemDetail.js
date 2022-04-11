@@ -7,11 +7,11 @@ import * as BsIcons from "react-icons/bs";
 
 const PlaylistItemDetail = () => {
     const [{ playlistDetail }] = useStore();
-    console.log(playlistDetail);
     const playlistOwner = useLocation().state.owner;
     const playlistImage = useLocation().state.images;
     const playlistName = useLocation().state.name;
     useEffect(() => {}, [playlistDetail]);
+
     return (
         <>
             <div className="relative top-0 left-0 h-full w-full bg-gradient-to-b from-[#555] to-[#2b2b2b] z-1">
@@ -21,10 +21,7 @@ const PlaylistItemDetail = () => {
                         <div className="relative flex items-end justify-items-center">
                             <div className="relative mx-5 mb-7 w-48 h-48 sm:w-48 sm:h-48 md:w-52 md:h-52 lg:w-52 lg:h-52 bg-[#282828] shadow-lg shadow-black">
                                 {playlistImage[0] ? (
-                                    <img
-                                        src={playlistImage?.[0]?.url}
-                                        alt="image"
-                                    />
+                                    <img src={playlistImage?.[0]?.url} alt="" />
                                 ) : (
                                     <svg
                                         height="96"
@@ -86,28 +83,62 @@ const PlaylistItemDetail = () => {
                         </div>
                     </div>
                     <div className="px-5">
-                        <div className="grid grid-cols-">
-                            <div
-                                className="grid gap-4" /* "flex flex-row items-center justify-between" */
-                                style={{
-                                    gridTemplateColumns:
-                                        "[index] 16px [first] 6fr [var1] 4fr [var2] 3fr [last] minmax(120px,1fr)",
-                                }}
-                            >
-                                <div className="text-white text-lg">#</div>
-                                <div className="text-white text-lg">title</div>
-                                <div className="text-white text-lg">Album</div>
-                                <div className="text-white text-lg">
-                                    Date Added
-                                </div>
-                                <div className="text-white text-lg">
-                                    <span>
-                                        <BsIcons.BsClock />
-                                    </span>
-                                </div>
-                            </div>
-                            <div></div>
-                        </div>
+                        <table className="w-full">
+                            <thead>
+                                <tr>
+                                    <th
+                                        data-priority="1"
+                                        className="tableHeading"
+                                    >
+                                        #
+                                    </th>
+                                    <th
+                                        data-priority="2"
+                                        className="tableHeading"
+                                    >
+                                        TITLE
+                                    </th>
+                                    <th
+                                        data-priority="3"
+                                        className="tableHeading"
+                                    >
+                                        ALBUM
+                                    </th>
+                                    <th
+                                        data-priority="4"
+                                        className="tableHeading"
+                                    >
+                                        DATE ADDED
+                                    </th>
+                                    <th
+                                        data-priority="5"
+                                        className="tableHeading"
+                                    >
+                                        <span className="mr-5">
+                                            <BsIcons.BsClock />
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Tiger Nixon</td>
+                                    <td>System Architect</td>
+                                    <td>Edinburgh</td>
+                                    <td>61</td>
+                                    <td>2011/04/25</td>
+                                    <td>$320,800</td>
+                                </tr>
+                                <tr>
+                                    <td>Donna Snider</td>
+                                    <td>Customer Support</td>
+                                    <td>New York</td>
+                                    <td>27</td>
+                                    <td>2011/01/25</td>
+                                    <td>$112,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -26,8 +26,8 @@ const LoginBtn = ({ user }) => {
                 onClick={handleBtn}
                 className={
                     isMenuOpen
-                        ? "bg-[#282828] bg-black hover:bg-[#282828] rounded-full flex justify-center items-center md:pl-1 md:pr-3 md:py-1 mr-3"
-                        : "hover:bg-[#282828] bg-black rounded-full flex justify-center items-center md:pl-1 md:pr-3 md:py-1 mr-3"
+                        ? "bg-black hover:bg-[#282828] rounded-full flex justify-center items-center md:pl-1 md:pr-3 md:py-1 mr-3"
+                        : "bg-black hover:bg-[#282828] rounded-full flex justify-center items-center md:pl-1 md:pr-3 md:py-1 mr-3"
                 }
             >
                 <img

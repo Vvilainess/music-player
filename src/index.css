@@ -6,6 +6,9 @@
     .login-btn {
         @apply rounded-full bg-white text-xs text-black;
     }
+    .tableHeading {
+        @apply text-[#b3b3b3] text-md;
+    }
 }
 ::-webkit-scrollbar {
     width: 10px;

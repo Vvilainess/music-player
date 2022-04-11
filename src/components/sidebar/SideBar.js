@@ -131,7 +131,6 @@ const Sidebar = () => {
             </div>
             <div className="pt-2 pb-2 flex-1 overflow-y-scroll mr-1">
                 {playlist.map((playlist, idx) => {
-                    console.log(playlist);
                     return (
                         <div key={idx} className="pt-1 pb-1 px-5">
                             <Link

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { actions, useStore } from "../Store";
 import LoginBtn from "../Feature-components/LoginBtn";
 import * as AiIcons from "react-icons/ai";
@@ -8,9 +8,6 @@ import { Router } from "react-router-dom";
 
 const Header = ({ searchInput, background }) => {
     const [{ user, token, input }, dispatch] = useStore();
-    const handleInput = (e) => {
-        dispatch(actions.setInput(e.target.value));
-    };
     const debounce = (fn, delay) => {
         let timerId;
         return (...args) => {
@@ -18,47 +15,54 @@ const Header = ({ searchInput, background }) => {
             timerId = setTimeout(() => fn(...args), delay);
         };
     };
-    const getSearchResult = ({ inputValue }) => {
+    const getSearchResult = (inputValue) => {
+        console.log(inputValue);
         getData(
             `https://api.spotify.com/v1/search?q=${inputValue}&type=album&include_external=audio?offset=0&limit=50`,
             token,
             "GET"
-        ).then((response) => {
-            const groupBy = (keys) => (array) =>
-                array.reduce((objectsByKeyValue, obj) => {
-                    const value = keys.map((key) => obj[key]).join("-");
-                    objectsByKeyValue[value] = (
-                        objectsByKeyValue[value] || []
-                    ).concat(obj);
-                    return objectsByKeyValue;
-                }, {});
-            const newSearchResult = groupBy(["album_type"]);
-            const obj = newSearchResult(response.data.albums.items);
-            if (input) {
-                dispatch(actions.setSearchResult(obj));
-            }
-        });
-    };
-    const handleSubmitSearch = (input) => {
-        debounce(getSearchResult(input), 1000);
-    };
-    useEffect(() => {
-        console.log(obj);
-        const getArtist = () => {
-            getData(
-                `https://api.spotify.com/v1/search?q=${input}&type=artist&include_external=audio?offset=0&limit=6`,
-                token,
-                "GET"
-            ).then((response) => {
-                if (response.data) {
-                    dispatch(actions.setArtist(response.data.artists.items));
+        )
+            .then((response) => {
+                const groupBy = (keys) => (array) =>
+                    array.reduce((objectsByKeyValue, obj) => {
+                        const value = keys.map((key) => obj[key]).join("-");
+                        objectsByKeyValue[value] = (
+                            objectsByKeyValue[value] || []
+                        ).concat(obj);
+                        return objectsByKeyValue;
+                    }, {});
+                const newSearchResult = groupBy(["album_type"]);
+                const obj = newSearchResult(response.data.albums.items);
+                if (input) {
+                    dispatch(actions.setSearchResult(obj));
                 }
-            });
-        };
-        if (input) {
-            /* getSearchResult(); */
-            getArtist();
-        } else {
+            })
+            .then(
+                getData(
+                    `https://api.spotify.com/v1/search?q=${input}&type=artist&include_external=audio?offset=0&limit=6`,
+                    token,
+                    "GET"
+                ).then((response) => {
+                    if (response.data) {
+                        dispatch(
+                            actions.setArtist(response.data.artists.items)
+                        );
+                    }
+                })
+            );
+    };
+    const debouceSearch = useCallback(
+        debounce((inputValue) => getSearchResult(inputValue), 1000),
+        []
+    );
+    const handleSubmitSearch = (e) => {
+        const { value } = e.target;
+        dispatch(actions.setInput(value));
+        debouceSearch(input);
+    };
+
+    useEffect(() => {
+        if (!input) {
             dispatch(actions.setSearchResult(null));
         }
     }, [input, token, dispatch]);
@@ -89,8 +93,7 @@ const Header = ({ searchInput, background }) => {
                         <input
                             value={input}
                             onChange={(e) => {
-                                handleInput(e);
-                                handleSubmitSearch(e.target.value);
+                                handleSubmitSearch(e);
                             }}
                             type="text"
                             name="search"
