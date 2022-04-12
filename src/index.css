@@ -7,16 +7,17 @@
         @apply rounded-full bg-white text-xs text-black;
     }
     .tableHeading {
-        @apply text-[#b3b3b3] text-lg text-left;
+        @apply text-[#b3b3b3] text-xs leading-4 tracking-widest text-left p-2;
     }
     .col-item {
-        @apply text-white
+        @apply text-white p-2;
     }
-    .table-artist, .table-album{
-        @apply text-[#b3b3b3] leading-5 hover:underline hover:text-white
+    .table-artist,
+    .table-album {
+        @apply text-[#b3b3b3] leading-5 hover:underline hover:text-white;
     }
     .table-artist {
-        @apply text-sm
+        @apply text-sm;
     }
 }
 ::-webkit-scrollbar {

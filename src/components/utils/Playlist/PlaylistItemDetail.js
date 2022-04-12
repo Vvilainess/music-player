@@ -7,9 +7,20 @@ import * as BsIcons from "react-icons/bs";
 
 const PlaylistItemDetail = () => {
     const [{ playlistDetail }] = useStore();
+    console.log(playlistDetail);
     const playlistOwner = useLocation().state.owner;
     const playlistImage = useLocation().state.images;
     const playlistName = useLocation().state.name;
+    const options = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+    };
+    function millisToMinutesAndSeconds(millis) {
+        var minutes = Math.floor(millis / 60000);
+        var seconds = ((millis % 60000) / 1000).toFixed(0);
+        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    }
     useEffect(() => {}, [playlistDetail]);
 
     return (
@@ -47,17 +58,26 @@ const PlaylistItemDetail = () => {
                             <p className="text-white text-xs md:text-sm lg:text-base font-bold uppercase">
                                 Playlist
                             </p>
-                            <h1 className="text-white text-3xl md:text-5xl lg:text-8xl font-bold leading-[48px]">
+                            <h1 className="text-white text-3xl leading-[30px] md:text-5xl md:leading-[48px] lg:text-8xl lg:leading-[96px] font-bold py-[0.08em]">
                                 {playlistName}
                             </h1>
-                            <Link
-                                to={playlistOwner.external_urls.spotify}
-                                target={"_blank"}
-                                key={playlistOwner.id}
-                                className="text-white text-sm font-bold hover:underline"
-                            >
-                                {playlistOwner.display_name}
-                            </Link>
+                            <div className="flex items-center flex-wrap mt-[8px]">
+                                <div className="grid gap-[4px] grid-flow-col items-center text-[rgba(255,255,255,.7)] whitespace-nowrap">
+                                    <span>
+                                        <Link
+                                            to={
+                                                playlistOwner.external_urls
+                                                    .spotify
+                                            }
+                                            target={"_blank"}
+                                            key={playlistOwner.id}
+                                            className="text-white text-sm font-bold hover:underline"
+                                        >
+                                            {playlistOwner.display_name}
+                                        </Link>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,7 +105,7 @@ const PlaylistItemDetail = () => {
                     <div className="px-5">
                         <table className="w-full">
                             <thead>
-                                <tr>
+                                <tr className="p-7">
                                     <th
                                         data-priority="1"
                                         className="tableHeading"
@@ -116,61 +136,105 @@ const PlaylistItemDetail = () => {
                                     >
                                         <div className="flex flex-row justify-start items-center">
                                             <span className="mr-5">
-                                                <BsIcons.BsClock />
+                                                <BsIcons.BsClock className="font-bold text-lg" />
                                             </span>
                                         </div>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="col-item">1</td>
-                                    <td className="col-item">
-                                        <div className="flex flex-row items-center">
-                                            <div>
-                                                <img
-                                                    src="https://i.scdn.co/image/ab67616d000048510785b44c5a814bb1318ebc8e"
-                                                    alt=""
-                                                    className="w-12 h-12"
-                                                />
-                                            </div>
-                                            <div className="flex flex-col justify-between h-full ml-5">
-                                                <div>
-                                                    <span>
-                                                        All about that bass
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <span className="table-artist">
-                                                        <Link to="/">
-                                                            Meghan
-                                                        </Link>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="col-item">
-                                        <Link to="/" className="table-album">
-                                            Album
-                                        </Link>
-                                    </td>
-                                    <td className="col-item text-[#b3b3b3]">
-                                        61
-                                    </td>
-                                    <td className="col-item text-[#b3b3b3]">
-                                        2011/04/25
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Customer Support</td>
-                                    <td>New York</td>
-                                    <td>27</td>
-                                    <td>2011/01/25</td>
-                                </tr>
+                                {playlistDetail?.map((item, idx) => {
+                                    return (
+                                        <>
+                                            <tr
+                                                className="hover:bg-[#ffffff1a] cursor-pointer"
+                                                key={idx}
+                                            >
+                                                <td className="col-item rounded-tl-lg rounded-bl-lg">
+                                                    {idx + 1}
+                                                </td>
+                                                <td className="col-item">
+                                                    <div className="flex flex-row items-center">
+                                                        <div>
+                                                            <img
+                                                                src={
+                                                                    item.track
+                                                                        .album
+                                                                        ?.images?.[2]
+                                                                        ?.url
+                                                                }
+                                                                alt=""
+                                                                className="w-12 h-12"
+                                                            />
+                                                        </div>
+                                                        <div className="flex flex-col justify-between h-full ml-5">
+                                                            <div>
+                                                                <span>
+                                                                    {
+                                                                        item
+                                                                            .track
+                                                                            .name
+                                                                    }
+                                                                </span>
+                                                            </div>
+                                                            <div>
+                                                                <span className="table-artist">
+                                                                    {item.track.artists.map(
+                                                                        (
+                                                                            artist,
+                                                                            idx
+                                                                        ) => (
+                                                                            <Link
+                                                                                to="/"
+                                                                                key={
+                                                                                    idx
+                                                                                }
+                                                                            >
+                                                                                {artist.name +
+                                                                                    ", "}
+                                                                            </Link>
+                                                                        )
+                                                                    )}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td className="col-item">
+                                                    <Link
+                                                        to="/"
+                                                        className="table-album"
+                                                    >
+                                                        {item.track.album.name}
+                                                    </Link>
+                                                </td>
+                                                <td className="col-item text-[#b3b3b3]">
+                                                    {new Date(
+                                                        item.added_at
+                                                    ).toLocaleDateString(
+                                                        "en-US",
+                                                        options
+                                                    )}
+                                                </td>
+                                                <td className="col-item text-[#b3b3b3] rounded-tr-lg rounded-br-lg">
+                                                    <div className="flex flex-row tabular-nums">
+                                                        {millisToMinutesAndSeconds(
+                                                            item.track
+                                                                .duration_ms
+                                                        )}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </>
+                                    );
+                                })}
                             </tbody>
                         </table>
+                        <button className="block ml-auto mt-8 mr-4 mb-0">
+                            <div className="inline-block uppercase text-xs tracking-widest leading-4 text-white font-bold">
+                                Find More
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>

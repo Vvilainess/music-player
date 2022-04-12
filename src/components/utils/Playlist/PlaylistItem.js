@@ -18,9 +18,10 @@ const PlaylistItem = ({ playlist }) => {
                     "GET"
                 ).then((res) => {
                     if (res.data) {
-                        dispatch(actions.setPlaylistDetail(res.data));
+                        dispatch(actions.setPlaylistDetail(res.data.items));
                     }
                 });
+                console.log(playlist.id);
             }}
             state={{
                 images: playlist.images,
