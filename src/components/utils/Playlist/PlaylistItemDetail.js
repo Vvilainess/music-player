@@ -114,28 +114,60 @@ const PlaylistItemDetail = () => {
                                         data-priority="5"
                                         className="tableHeading"
                                     >
-                                        <span className="mr-5">
-                                            <BsIcons.BsClock />
-                                        </span>
+                                        <div className="flex flex-row justify-start items-center">
+                                            <span className="mr-5">
+                                                <BsIcons.BsClock />
+                                            </span>
+                                        </div>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
+                                    <td className="col-item">1</td>
+                                    <td className="col-item">
+                                        <div className="flex flex-row items-center">
+                                            <div>
+                                                <img
+                                                    src="https://i.scdn.co/image/ab67616d000048510785b44c5a814bb1318ebc8e"
+                                                    alt=""
+                                                    className="w-12 h-12"
+                                                />
+                                            </div>
+                                            <div className="flex flex-col justify-between h-full ml-5">
+                                                <div>
+                                                    <span>
+                                                        All about that bass
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span className="table-artist">
+                                                        <Link to="/">
+                                                            Meghan
+                                                        </Link>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td className="col-item">
+                                        <Link to="/" className="table-album">
+                                            Album
+                                        </Link>
+                                    </td>
+                                    <td className="col-item text-[#b3b3b3]">
+                                        61
+                                    </td>
+                                    <td className="col-item text-[#b3b3b3]">
+                                        2011/04/25
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Donna Snider</td>
+                                    <td>2</td>
                                     <td>Customer Support</td>
                                     <td>New York</td>
                                     <td>27</td>
                                     <td>2011/01/25</td>
-                                    <td>$112,000</td>
                                 </tr>
                             </tbody>
                         </table>
