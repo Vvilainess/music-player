@@ -147,8 +147,8 @@ const PlaylistItemDetail = () => {
                                     return (
                                         <>
                                             <tr
-                                                className="hover:bg-[#ffffff1a] cursor-pointer"
                                                 key={idx}
+                                                className="hover:bg-[#ffffff1a] cursor-pointer"
                                             >
                                                 <td className="col-item rounded-tl-lg rounded-bl-lg">
                                                     {idx + 1}

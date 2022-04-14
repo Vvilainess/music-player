@@ -1,8 +1,7 @@
 import React from "react";
 import PlayBack from "../Footer-components/PlayBack";
 import Switch from "../Router/Switch";
-import SideBar from "../SideBar/SideBar";
-import Header from "../Header-components/Header";
+import SideBar from "../SideBar-components/SideBar";
 
 const Layout = () => {
     return (
