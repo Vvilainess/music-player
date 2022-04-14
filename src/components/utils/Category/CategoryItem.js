@@ -1,7 +1,6 @@
 import React from "react";
 
 const CategoryItem = ({ category }) => {
-    console.log(category);
     return (
         <div
             className={

@@ -8,8 +8,6 @@ import Track from "../components/Utils/Track/Track";
 const Search = () => {
     const [{ categories, searchResult, input, artists }, dispatch] = useStore();
     useEffect(() => {
-        console.log(searchResult);
-        console.log(artists);
         if (!input) {
             dispatch(actions.setSearchResult(null));
         }

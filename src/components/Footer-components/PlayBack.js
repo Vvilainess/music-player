@@ -7,7 +7,7 @@ const PlayBack = () => {
         setHeart((prev) => !prev);
     };
     return (
-        <div className="absolute hidden bg-[#181818] w-100 left-0 bottom-0 z-10">
+        <footer className="relative bg-[#181818] w-100 left-0 bottom-0 z-10">
             <div className="h-auto bg-[#181818] border-t border-[#282828] flex flex-col min-w-[620px]">
                 <div className="flex flex-row justify-start px-4 py-0 h-[90px]">
                     <div className="flex flex-col items-center justify-center">
@@ -53,7 +53,7 @@ const PlayBack = () => {
                     </button>
                 </div>
             </div>
-        </div>
+        </footer>
     );
 };
 
