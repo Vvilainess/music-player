@@ -7,7 +7,7 @@ import Logo from "./Logo";
 
 const Sidebar = () => {
     return (
-        <div className="relative flex flex-col w-[241px] mb-[90px] bg-black pt-6">
+        <div className="relative flex flex-col w-[241px] pb-[90px] max-h-screen bg-black pt-6">
             <Logo />
             <FeatureMenu />
             <Spacer />
