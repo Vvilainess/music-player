@@ -145,87 +145,84 @@ const PlaylistItemDetail = () => {
                             <tbody>
                                 {playlistDetail?.map((item, idx) => {
                                     return (
-                                        <>
-                                            <tr
-                                                key={idx}
-                                                className="hover:bg-[#ffffff1a] cursor-pointer"
-                                            >
-                                                <td className="col-item rounded-tl-lg rounded-bl-lg">
-                                                    {idx + 1}
-                                                </td>
-                                                <td className="col-item">
-                                                    <div className="flex flex-row items-center">
+                                        <tr
+                                            key={idx}
+                                            className="hover:bg-[#ffffff1a] cursor-pointer"
+                                        >
+                                            <td className="col-item rounded-tl-lg rounded-bl-lg">
+                                                {idx + 1}
+                                            </td>
+                                            <td className="col-item">
+                                                <div className="flex flex-row items-center">
+                                                    <div>
+                                                        <img
+                                                            src={
+                                                                item.track.album
+                                                                    ?.images?.[2]
+                                                                    ?.url
+                                                            }
+                                                            alt=""
+                                                            className="w-12 h-12"
+                                                        />
+                                                    </div>
+                                                    <div className="flex flex-col justify-between h-full ml-5">
                                                         <div>
-                                                            <img
-                                                                src={
+                                                            <span>
+                                                                {
                                                                     item.track
-                                                                        .album
-                                                                        ?.images?.[2]
-                                                                        ?.url
+                                                                        .name
                                                                 }
-                                                                alt=""
-                                                                className="w-12 h-12"
-                                                            />
+                                                            </span>
                                                         </div>
-                                                        <div className="flex flex-col justify-between h-full ml-5">
-                                                            <div>
-                                                                <span>
-                                                                    {
-                                                                        item
-                                                                            .track
-                                                                            .name
-                                                                    }
-                                                                </span>
-                                                            </div>
-                                                            <div>
-                                                                <span className="table-artist">
-                                                                    {item.track.artists.map(
-                                                                        (
-                                                                            artist,
-                                                                            idx
-                                                                        ) => (
-                                                                            <Link
-                                                                                to="/"
-                                                                                key={
-                                                                                    idx
-                                                                                }
-                                                                            >
-                                                                                {artist.name +
-                                                                                    ", "}
-                                                                            </Link>
-                                                                        )
-                                                                    )}
-                                                                </span>
-                                                            </div>
+                                                        <div>
+                                                            <span className="table-artist">
+                                                                {item.track.artists.map(
+                                                                    (
+                                                                        artist,
+                                                                        idx
+                                                                    ) => (
+                                                                        <Link
+                                                                            to="/"
+                                                                            key={
+                                                                                idx
+                                                                            }
+                                                                        >
+                                                                            {(idx
+                                                                                ? ", "
+                                                                                : "") +
+                                                                                artist.name}
+                                                                        </Link>
+                                                                    )
+                                                                )}
+                                                            </span>
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td className="col-item">
-                                                    <Link
-                                                        to="/"
-                                                        className="table-album"
-                                                    >
-                                                        {item.track.album.name}
-                                                    </Link>
-                                                </td>
-                                                <td className="col-item text-[#b3b3b3]">
-                                                    {new Date(
-                                                        item.added_at
-                                                    ).toLocaleDateString(
-                                                        "en-US",
-                                                        options
+                                                </div>
+                                            </td>
+                                            <td className="col-item">
+                                                <Link
+                                                    to="/"
+                                                    className="table-album"
+                                                >
+                                                    {item.track.album.name}
+                                                </Link>
+                                            </td>
+                                            <td className="col-item text-[#b3b3b3]">
+                                                {new Date(
+                                                    item.added_at
+                                                ).toLocaleDateString(
+                                                    "en-US",
+                                                    options
+                                                )}
+                                            </td>
+                                            <td className="col-item text-[#b3b3b3] rounded-tr-lg rounded-br-lg">
+                                                <div className="flex flex-row tabular-nums">
+                                                    {millisToMinutesAndSeconds(
+                                                        item.track.duration_ms
                                                     )}
-                                                </td>
-                                                <td className="col-item text-[#b3b3b3] rounded-tr-lg rounded-br-lg">
-                                                    <div className="flex flex-row tabular-nums">
-                                                        {millisToMinutesAndSeconds(
-                                                            item.track
-                                                                .duration_ms
-                                                        )}
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     );
                                 })}
                             </tbody>

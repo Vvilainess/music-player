@@ -10,7 +10,7 @@ const SearchInput = ({ searchInput }) => {
         if (!input) {
             dispatch(actions.setSearchResult(null));
         }
-    }, [input, token, dispatch]);
+    }, [input, dispatch]);
     const debounce = (fn, delay) => {
         let timerId;
         return (...args) => {
@@ -19,13 +19,15 @@ const SearchInput = ({ searchInput }) => {
         };
     };
     const debouceSearch = useCallback(
-        debounce((inputValue) => getSearchResult(inputValue), 1000),
+        debounce((inputValue) => getSearchResult(inputValue), 1500),
         []
     );
     const handleSubmitSearch = (e) => {
         const { value } = e.target;
         dispatch(actions.setInput(value));
-        debouceSearch(value);
+        if (value) {
+            debouceSearch(value);
+        }
     };
     const getSearchResult = (inputValue) => {
         getData(

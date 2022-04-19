@@ -80,9 +80,10 @@ const Search = () => {
                                         <div>
                                             <p className="inline-block text-[#b3b3b3] hover:underline cursor-pointer pr-5">
                                                 {searchResult?.album?.[0]?.artists.map(
-                                                    (artist) => {
+                                                    (artist, idx) => {
                                                         return (
-                                                            artist.name + ", "
+                                                            (idx ? ", " : "") +
+                                                            artist.name
                                                         );
                                                     }
                                                 )}
