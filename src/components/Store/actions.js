@@ -8,6 +8,7 @@ import {
     SET_RECENTPLAYED,
     SET_ARTISTS,
     SET_PLAYLISTDETAIL,
+    SET_TOP_ARTISTS,
 } from "./constants";
 
 export const setToken = (payload) => ({
@@ -16,6 +17,10 @@ export const setToken = (payload) => ({
 });
 export const setUser = (payload) => ({
     type: SET_USER,
+    payload,
+});
+export const setTopArtist = (payload) => ({
+    type: SET_TOP_ARTISTS,
     payload,
 });
 export const setPlaylist = (payload) => ({

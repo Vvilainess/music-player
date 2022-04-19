@@ -1,6 +1,7 @@
 import {
     SET_TOKEN,
     SET_USER,
+    SET_TOP_ARTISTS,
     SET_PLAYLIST,
     SET_CATEGORIES,
     SET_SEARCHRESULT,
@@ -13,6 +14,7 @@ import {
 const initialState = {
     token: "",
     user: {},
+    topartists: {},
     playlist: [],
     playlistDetail: null,
     recentPlayed: {},
@@ -36,6 +38,11 @@ function reducer(state, actions) {
             return {
                 ...state,
                 user: actions.payload,
+            };
+        case SET_TOP_ARTISTS:
+            return {
+                ...state,
+                topartists: actions.payload,
             };
         case SET_PLAYLIST:
             return {

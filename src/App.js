@@ -7,16 +7,38 @@ import getTokenFromUrl, {
 } from "./components/Auth/getTokenFromUrl";
 import getData from "./components/GetAPI/Axios";
 import { useStore, actions } from "./components/Store";
+import SpotifyWebApi from "spotify-web-api-js";
+import {
+    setCategories,
+    setPlaylist,
+    setTopArtist,
+    setUser,
+} from "./components/Store/actions";
+import CategoryItem from "./components/Utils/Category/CategoryItem";
 
+const spotify = new SpotifyWebApi();
 function App() {
-    const [state, dispatch] = useStore();
-    const { access_token } = getTokenFromUrl();
+    const [{ token, playlists, user }, dispatch] = useStore();
     useEffect(() => {
+        const { access_token } = getTokenFromUrl();
         window.location.hash = "";
-        if (access_token) {
+        let _token = access_token;
+        if (_token) {
+            spotify.setAccessToken(_token);
             console.log(access_token);
-            dispatch(actions.setToken(access_token));
-            getData("https://api.spotify.com/v1/me", access_token, "GET")
+            dispatch(actions.setToken(_token));
+            spotify.getMe().then((user) => dispatch(setUser(user)));
+            spotify.getMyTopArtists().then((response) => {
+                dispatch(setTopArtist);
+            });
+            spotify.getUserPlaylists().then((playlists) => {
+                dispatch(setPlaylist(playlists.items));
+            });
+            spotify.getCategories().then((response) => {
+                console.log(response.categories.items);
+                dispatch(setCategories(response.categories.items));
+            });
+            /* getData("https://api.spotify.com/v1/me", access_token, "GET")
                 .then((userResponse) => {
                     const { display_name, images, id } = userResponse.data;
                     console.log(id);
@@ -42,11 +64,11 @@ function App() {
                             )
                         );
                     })
-                );
+                ); */
         }
         return () => {};
-    }, [state.token, state.playlist, state.categories, dispatch]);
-    return <div className="App">{state.token ? <Layout /> : <Login />}</div>;
+    }, [token, playlists, user, dispatch]);
+    return <div className="App">{token ? <Layout /> : <Login />}</div>;
 }
 
 export default App;
