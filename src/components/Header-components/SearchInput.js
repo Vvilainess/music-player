@@ -12,7 +12,7 @@ const SearchInput = ({ searchInput }) => {
         if (!input) {
             dispatch(actions.setSearchResult(null));
         }
-    }, [input, dispatch]);
+    }, [input, token, dispatch]);
     const debounce = (fn, delay) => {
         let timerId;
         return (...args) => {
@@ -20,8 +20,26 @@ const SearchInput = ({ searchInput }) => {
             timerId = setTimeout(() => fn(...args), delay);
         };
     };
-    /* const debouceSearch = useCallback(
-        debounce((inputValue) => getSearchResult(inputValue), 1500),
+    const debouceSearch = useCallback(
+        debounce(
+            (inputValue) =>
+                spotify.searchAlbums(inputValue).then((response) => {
+                    const groupBy = (keys) => (array) =>
+                        array.reduce((objectsByKeyValue, obj) => {
+                            const value = keys.map((key) => obj[key]).join("-");
+                            objectsByKeyValue[value] = (
+                                objectsByKeyValue[value] || []
+                            ).concat(obj);
+                            return objectsByKeyValue;
+                        }, {});
+                    const newSearchResult = groupBy(["album_type"]);
+                    const obj = newSearchResult(response.albums.items);
+                    if (input) {
+                        dispatch(actions.setSearchResult(obj));
+                    }
+                }),
+            1500
+        ),
         []
     );
     const handleSubmitSearch = (e) => {
@@ -30,48 +48,42 @@ const SearchInput = ({ searchInput }) => {
         if (value) {
             debouceSearch(value);
         }
-    }; */
-    const handleInput = (e) => {
-        dispatch(actions(setInput(e.target.value)));
     };
-    /* spotify.search(input).then((response) => {
-        console.log(response);
-    }); */
-    /* const getSearchResult = (inputValue) => {
-        getData(
-            `https://api.spotify.com/v1/search?q=${inputValue}&type=album&include_external=audio?offset=0&limit=50`,
-            token,
-            "GET"
-        )
-            .then((response) => {
-                const groupBy = (keys) => (array) =>
-                    array.reduce((objectsByKeyValue, obj) => {
-                        const value = keys.map((key) => obj[key]).join("-");
-                        objectsByKeyValue[value] = (
-                            objectsByKeyValue[value] || []
-                        ).concat(obj);
-                        return objectsByKeyValue;
-                    }, {});
-                const newSearchResult = groupBy(["album_type"]);
-                const obj = newSearchResult(response.data.albums.items);
-                if (input) {
-                    dispatch(actions.setSearchResult(obj));
-                }
-            })
-            .then(
-                getData(
-                    `https://api.spotify.com/v1/search?q=${inputValue}&type=artist&include_external=audio?offset=0&limit=6`,
-                    token,
-                    "GET"
-                ).then((response) => {
-                    if (response.data) {
-                        dispatch(
-                            actions.setArtist(response.data.artists.items)
-                        );
-                    }
-                })
-            );
-    }; */
+    // const getSearchResult = (inputValue) => {
+    //     getData(
+    //         `https://api.spotify.com/v1/search?q=${inputValue}&type=album&include_external=audio?offset=0&limit=50`,
+    //         token,
+    //         "GET"
+    //     )
+    //         .then((response) => {
+    //             const groupBy = (keys) => (array) =>
+    //                 array.reduce((objectsByKeyValue, obj) => {
+    //                     const value = keys.map((key) => obj[key]).join("-");
+    //                     objectsByKeyValue[value] = (
+    //                         objectsByKeyValue[value] || []
+    //                     ).concat(obj);
+    //                     return objectsByKeyValue;
+    //                 }, {});
+    //             const newSearchResult = groupBy(["album_type"]);
+    //             const obj = newSearchResult(response.data.albums.items);
+    //             if (input) {
+    //                 dispatch(actions.setSearchResult(obj));
+    //             }
+    //         })
+    //         .then(
+    //             getData(
+    //                 `https://api.spotify.com/v1/search?q=${inputValue}&type=artist&include_external=audio?offset=0&limit=6`,
+    //                 token,
+    //                 "GET"
+    //             ).then((response) => {
+    //                 if (response.data) {
+    //                     dispatch(
+    //                         actions.setArtist(response.data.artists.items)
+    //                     );
+    //                 }
+    //             })
+    //         );
+    // };
     return (
         <>
             {searchInput ? (
@@ -80,7 +92,7 @@ const SearchInput = ({ searchInput }) => {
                         <input
                             value={input}
                             onChange={(e) => {
-                                handleInput(e);
+                                handleSubmitSearch(e);
                             }}
                             type="text"
                             name="search"

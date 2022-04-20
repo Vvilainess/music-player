@@ -38,9 +38,9 @@ function App() {
                 console.log(response.categories.items);
                 dispatch(setCategories(response.categories.items));
             });
-            spotify.search(input).then((response) => {
-                console.log(response);
-            });
+            /* spotify.searchAlbums("taeyeon").then((result) => {
+                console.log(result);
+            }); */
             /* getData("https://api.spotify.com/v1/me", access_token, "GET")
                 .then((userResponse) => {
                     const { display_name, images, id } = userResponse.data;

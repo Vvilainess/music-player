@@ -108,6 +108,7 @@ const Search = () => {
                                     {searchResult?.single
                                         ?.slice(0, 4)
                                         .map((single) => {
+                                            console.log(single);
                                             return (
                                                 <Track
                                                     key={single.id}
@@ -140,7 +141,9 @@ const Search = () => {
                                 <h1 className="capitalize font-bold text-2xl text-white">
                                     Albums
                                 </h1>
-                                <div className="flex flex-row flex-wrap content-start px-3 py-4">
+                                <div
+                                    className="grid gap-x-6" /* "flex flex-row flex-wrap content-start px-3 py-4" */
+                                >
                                     {searchResult?.album
                                         ?.slice(1, 7)
                                         .map((item) => {
