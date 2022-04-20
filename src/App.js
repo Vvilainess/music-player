@@ -16,9 +16,9 @@ import {
 } from "./components/Store/actions";
 import CategoryItem from "./components/Utils/Category/CategoryItem";
 
-const spotify = new SpotifyWebApi();
+export const spotify = new SpotifyWebApi();
 function App() {
-    const [{ token, playlists, user }, dispatch] = useStore();
+    const [{ token, playlists, input, user }, dispatch] = useStore();
     useEffect(() => {
         const { access_token } = getTokenFromUrl();
         window.location.hash = "";
@@ -29,7 +29,7 @@ function App() {
             dispatch(actions.setToken(_token));
             spotify.getMe().then((user) => dispatch(setUser(user)));
             spotify.getMyTopArtists().then((response) => {
-                dispatch(setTopArtist);
+                dispatch(setTopArtist(response.items));
             });
             spotify.getUserPlaylists().then((playlists) => {
                 dispatch(setPlaylist(playlists.items));
@@ -37,6 +37,9 @@ function App() {
             spotify.getCategories().then((response) => {
                 console.log(response.categories.items);
                 dispatch(setCategories(response.categories.items));
+            });
+            spotify.search(input).then((response) => {
+                console.log(response);
             });
             /* getData("https://api.spotify.com/v1/me", access_token, "GET")
                 .then((userResponse) => {

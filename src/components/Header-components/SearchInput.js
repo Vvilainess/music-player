@@ -3,6 +3,8 @@ import { useStore, actions } from "../Store";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import getData from "../GetAPI/Axios";
+import { spotify } from "../../App";
+import { setInput } from "../Store/actions";
 
 const SearchInput = ({ searchInput }) => {
     const [{ input, token }, dispatch] = useStore();
@@ -18,7 +20,7 @@ const SearchInput = ({ searchInput }) => {
             timerId = setTimeout(() => fn(...args), delay);
         };
     };
-    const debouceSearch = useCallback(
+    /* const debouceSearch = useCallback(
         debounce((inputValue) => getSearchResult(inputValue), 1500),
         []
     );
@@ -28,8 +30,14 @@ const SearchInput = ({ searchInput }) => {
         if (value) {
             debouceSearch(value);
         }
+    }; */
+    const handleInput = (e) => {
+        dispatch(actions(setInput(e.target.value)));
     };
-    const getSearchResult = (inputValue) => {
+    /* spotify.search(input).then((response) => {
+        console.log(response);
+    }); */
+    /* const getSearchResult = (inputValue) => {
         getData(
             `https://api.spotify.com/v1/search?q=${inputValue}&type=album&include_external=audio?offset=0&limit=50`,
             token,
@@ -63,7 +71,7 @@ const SearchInput = ({ searchInput }) => {
                     }
                 })
             );
-    };
+    }; */
     return (
         <>
             {searchInput ? (
@@ -72,7 +80,7 @@ const SearchInput = ({ searchInput }) => {
                         <input
                             value={input}
                             onChange={(e) => {
-                                handleSubmitSearch(e);
+                                handleInput(e);
                             }}
                             type="text"
                             name="search"
