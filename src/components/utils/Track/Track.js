@@ -16,14 +16,14 @@ const Track = ({ single }) => {
             <div className="pl-4">
                 <p>{single.name}</p>
                 <p>
-                    {single.artists.map((artist) => {
+                    {single.artists.map((artist, idx) => {
                         return (
                             <Link
                                 key={artist.id}
                                 to="#"
                                 className="text-[#b3b3b3] text-base hover:underline"
                             >
-                                {artist.name + ", "}
+                                {(idx ? ", " : "") + artist.name}
                             </Link>
                         );
                     })}

@@ -2,8 +2,8 @@ import React from "react";
 
 const SearchResultItem = ({ item }) => {
     return (
-        <div className="rounded-md inline-block mr-5 mb-5 bg-[#181818] hover:bg-[#282828] transition ease-in duration-150 cursor-pointer">
-            <div className="px-5 py-7 w-44 shadow-lg shadow-black">
+        <div className="rounded-md inline-block mb-5 cursor-pointer">
+            <div className="px-5 py-7 shadow-lg shadow-black">
                 <div className="relative pb-1">
                     <div className="rounded-full relative pb-[100%] w-full">
                         <div>

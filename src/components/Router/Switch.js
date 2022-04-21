@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "../../pages/Home";
-import Search from "../../pages/Search";
+import Search from "../../pages/Search/Search";
 import Library from "../../pages/Library";
 import LikedSongs from "../../pages/LikedSongs";
 import CreatePlaylist from "../../pages/CreatePlaylist";

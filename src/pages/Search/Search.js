@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
-import Header from "../components/Header-components/Header";
-import { actions, useStore } from "../components/Store";
-import CategoryItem from "../components/Utils/Category/CategoryItem";
-import SearchResultItem from "../components/Utils/SearchResultItem";
-import Track from "../components/Utils/Track/Track";
+import Header from "../../components/Header-components/Header";
+import { actions, useStore } from "../../components/Store";
+import CategoryItem from "../../components/Utils/Category/CategoryItem";
+import SearchResultItem from "../../components/Utils/SearchResultItem";
+import Track from "../../components/Utils/Track/Track";
+import AlbumsResult from "./AlbumsResult";
+import ArtistsResult from "./ArtistsResult";
+import EmptyResult from "./EmptyResult";
 
 const Search = () => {
     const [{ categories, searchResult, input, artists }, dispatch] = useStore();
@@ -13,21 +16,11 @@ const Search = () => {
         }
     }, [searchResult, input, artists, categories, dispatch]);
     return (
-        <div className="relative bg-[#121212]">
+        <div className="relative bg-[#121212] pb-[150px]">
             <Header searchInput={true} background="bg-[#101010]" />
             <div className="px-9 py-7">
                 {!searchResult?.album?.[0] && input && (
-                    <div className="w-full h-screen top-0 right-0 bottom-0">
-                        <div className="flex flex-col items-center justify-center">
-                            <h1 className="text-white font-bold font-3xl block">
-                                {`No results found for "${input}"`}
-                            </h1>
-                            <p className="text-white font-xl block">
-                                Please make sure your words are spelled
-                                correctly or use less or different keywords.
-                            </p>
-                        </div>
-                    </div>
+                    <EmptyResult input={input} />
                 )}
                 {!searchResult && !input && (
                     <>
@@ -108,7 +101,6 @@ const Search = () => {
                                     {searchResult?.single
                                         ?.slice(0, 4)
                                         .map((single) => {
-                                            console.log(single);
                                             return (
                                                 <Track
                                                     key={single.id}
@@ -120,42 +112,10 @@ const Search = () => {
                             </div>
                         </div>
                         <div className="">
-                            <div>
-                                <h1 className="capitalize font-bold text-2xl text-white">
-                                    Artists
-                                </h1>
-                                <div className="flex flex-row flex-wrap contents-start px-3 py-4">
-                                    {artists?.map((item, idx) => {
-                                        return (
-                                            <SearchResultItem
-                                                key={idx}
-                                                item={item}
-                                            />
-                                        );
-                                    })}
-                                </div>
-                            </div>
+                            <ArtistsResult artists={artists} />
                         </div>
                         <div className="">
-                            <div>
-                                <h1 className="capitalize font-bold text-2xl text-white">
-                                    Albums
-                                </h1>
-                                <div
-                                    className="grid gap-x-6" /* "flex flex-row flex-wrap content-start px-3 py-4" */
-                                >
-                                    {searchResult?.album
-                                        ?.slice(1, 7)
-                                        .map((item) => {
-                                            return (
-                                                <SearchResultItem
-                                                    key={item.id}
-                                                    item={item}
-                                                />
-                                            );
-                                        })}
-                                </div>
-                            </div>
+                            <AlbumsResult searchResult={searchResult} />
                         </div>
                     </>
                 )}

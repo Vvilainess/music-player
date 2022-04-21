@@ -2,17 +2,18 @@ import React, { useCallback, useEffect } from "react";
 import { useStore, actions } from "../Store";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
-import getData from "../GetAPI/Axios";
 import { spotify } from "../../App";
-import { setInput } from "../Store/actions";
 
 const SearchInput = ({ searchInput }) => {
     const [{ input, token }, dispatch] = useStore();
-    useEffect(() => {
-        if (!input) {
-            dispatch(actions.setSearchResult(null));
-        }
-    }, [input, token, dispatch]);
+    const groupBy = (keys) => (array) =>
+        array.reduce((objectsByKeyValue, obj) => {
+            const value = keys.map((key) => obj[key]).join("-");
+            objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(
+                obj
+            );
+            return objectsByKeyValue;
+        }, {});
     const debounce = (fn, delay) => {
         let timerId;
         return (...args) => {
@@ -20,37 +21,36 @@ const SearchInput = ({ searchInput }) => {
             timerId = setTimeout(() => fn(...args), delay);
         };
     };
+    useEffect(() => {
+        if (!input) {
+            dispatch(actions.setSearchResult(null));
+        }
+    }, [input, token, dispatch]);
+
     const debouceSearch = useCallback(
         debounce(
             (inputValue) =>
                 spotify
                     .searchAlbums(inputValue)
                     .then((response) => {
-                        const groupBy = (keys) => (array) =>
-                            array.reduce((objectsByKeyValue, obj) => {
-                                const value = keys
-                                    .map((key) => obj[key])
-                                    .join("-");
-                                objectsByKeyValue[value] = (
-                                    objectsByKeyValue[value] || []
-                                ).concat(obj);
-                                return objectsByKeyValue;
-                            }, {});
-
                         const newSearchResult = groupBy(["album_type"]);
                         const obj = newSearchResult(response.albums.items);
                         if (input) {
                             dispatch(actions.setSearchResult(obj));
                         }
-                    }, 1500)
+                    })
                     .then(
-                        spotify.searchArtists(inputValue).then((response) => {
-                            console.log(response);
-                        })
-                        
-                    )
-            []
-        )
+                        spotify
+                            .searchArtists(inputValue, { limit: 6, offset: 6 })
+                            .then((response) =>
+                                dispatch(
+                                    actions.setArtist(response.artists.items)
+                                )
+                            )
+                    ),
+            1500
+        ),
+        []
     );
     const handleSubmitSearch = (e) => {
         const { value } = e.target;
