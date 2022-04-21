@@ -23,24 +23,34 @@ const SearchInput = ({ searchInput }) => {
     const debouceSearch = useCallback(
         debounce(
             (inputValue) =>
-                spotify.searchAlbums(inputValue).then((response) => {
-                    const groupBy = (keys) => (array) =>
-                        array.reduce((objectsByKeyValue, obj) => {
-                            const value = keys.map((key) => obj[key]).join("-");
-                            objectsByKeyValue[value] = (
-                                objectsByKeyValue[value] || []
-                            ).concat(obj);
-                            return objectsByKeyValue;
-                        }, {});
-                    const newSearchResult = groupBy(["album_type"]);
-                    const obj = newSearchResult(response.albums.items);
-                    if (input) {
-                        dispatch(actions.setSearchResult(obj));
-                    }
-                }),
-            1500
-        ),
-        []
+                spotify
+                    .searchAlbums(inputValue)
+                    .then((response) => {
+                        const groupBy = (keys) => (array) =>
+                            array.reduce((objectsByKeyValue, obj) => {
+                                const value = keys
+                                    .map((key) => obj[key])
+                                    .join("-");
+                                objectsByKeyValue[value] = (
+                                    objectsByKeyValue[value] || []
+                                ).concat(obj);
+                                return objectsByKeyValue;
+                            }, {});
+
+                        const newSearchResult = groupBy(["album_type"]);
+                        const obj = newSearchResult(response.albums.items);
+                        if (input) {
+                            dispatch(actions.setSearchResult(obj));
+                        }
+                    }, 1500)
+                    .then(
+                        spotify.searchArtists(inputValue).then((response) => {
+                            console.log(response);
+                        })
+                        
+                    )
+            []
+        )
     );
     const handleSubmitSearch = (e) => {
         const { value } = e.target;
