@@ -70,7 +70,7 @@ function App() {
                 ); */
         }
         return () => {};
-    }, [token, playlists, user, dispatch]);
+    }, [token, playlists, input, user, dispatch]);
     return <div className="App">{token ? <Layout /> : <Login />}</div>;
 }
 

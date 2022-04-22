@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import Header from "../../components/Header-components/Header";
 import { actions, useStore } from "../../components/Store";
-import CategoryItem from "../../components/Utils/Category/CategoryItem";
-import SearchResultItem from "../../components/Utils/SearchResultItem";
-import Track from "../../components/Utils/Track/Track";
 import AlbumsResult from "./AlbumsResult";
 import ArtistsResult from "./ArtistsResult";
+import CategoriesResult from "./CategoriesResult";
 import EmptyResult from "./EmptyResult";
+import Songslist from "./Songslist";
+import TopResult from "./TopResult";
 
 const Search = () => {
     const [{ categories, searchResult, input, artists }, dispatch] = useStore();
@@ -23,93 +23,13 @@ const Search = () => {
                     <EmptyResult input={input} />
                 )}
                 {!searchResult && !input && (
-                    <>
-                        <div className="w-full pb-3">
-                            <h1 className="capitalize font-bold text-2xl text-white">
-                                browser all
-                            </h1>
-                        </div>
-                        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 sm:gap-5 md:gap-4 lg:gap-5">
-                            {categories.map((category, idx) => {
-                                return (
-                                    <CategoryItem
-                                        category={category}
-                                        key={idx}
-                                    />
-                                );
-                            })}
-                        </div>
-                    </>
+                    <CategoriesResult categories={categories} />
                 )}
                 {searchResult && searchResult.album && (
                     <>
                         <div className="flex sm:flex-wrap md:flex-wrap">
-                            <div className="">
-                                <div className="sm:grow-1 sm:w-96 text-white md:grow-1">
-                                    <div className="w-full pb-3 flex flex-col justify-between">
-                                        <h1 className="capitalize font-bold text-2xl text-white">
-                                            Top result
-                                        </h1>
-                                    </div>
-                                    <div className="rounded-md bg-[#181818] hover:bg-[#282828] px-3 py-5">
-                                        <div className="pb-5">
-                                            <img
-                                                src={
-                                                    searchResult?.album?.[0]
-                                                        .images[1].url
-                                                }
-                                                alt={
-                                                    searchResult?.album?.[0]
-                                                        ?.name
-                                                }
-                                                className="w-24 h-24 rounded-md"
-                                            />
-                                        </div>
-                                        <div className="pb-1">
-                                            <h1 className="text-2xl text-white font-bold">
-                                                {searchResult?.album?.[0]?.name}
-                                            </h1>
-                                        </div>
-                                        <div>
-                                            <p className="inline-block text-[#b3b3b3] hover:underline cursor-pointer pr-5">
-                                                {searchResult?.album?.[0]?.artists.map(
-                                                    (artist, idx) => {
-                                                        return (
-                                                            (idx ? ", " : "") +
-                                                            artist.name
-                                                        );
-                                                    }
-                                                )}
-                                            </p>
-                                            <span className="text-white text-md font-bold rounded-full uppercase leading-[1rem] bg-[rgba(0,0,0,.2)] px-3">
-                                                {
-                                                    searchResult?.album?.[0]
-                                                        ?.album_type
-                                                }
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="sm:flex-1 md:flex-1 lg:w-96 text-white">
-                                <div className="w-full pb-1">
-                                    <h1 className="capitalize font-bold text-2xl text-white">
-                                        songs
-                                    </h1>
-                                </div>
-                                <div className="p-2">
-                                    {searchResult?.single
-                                        ?.slice(0, 4)
-                                        .map((single) => {
-                                            return (
-                                                <Track
-                                                    key={single.id}
-                                                    single={single}
-                                                />
-                                            );
-                                        })}
-                                </div>
-                            </div>
+                            <TopResult searchResult={searchResult} />
+                            <Songslist searchResult={searchResult} />
                         </div>
                         <div className="">
                             <ArtistsResult artists={artists} />

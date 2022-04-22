@@ -31,7 +31,7 @@ const SearchInput = ({ searchInput }) => {
         debounce(
             (inputValue) =>
                 spotify
-                    .searchAlbums(inputValue)
+                    .searchAlbums(inputValue, { limit: 6 })
                     .then((response) => {
                         const newSearchResult = groupBy(["album_type"]);
                         const obj = newSearchResult(response.albums.items);
@@ -48,7 +48,7 @@ const SearchInput = ({ searchInput }) => {
                                 )
                             )
                     ),
-            1500
+            1000
         ),
         []
     );
