@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 import Login from "./components/Feature-components/Login";
 import Layout from "./components/Layout/Layout";
-import getTokenFromUrl, {
-    getPlaylist,
-    getCategories,
-} from "./components/Auth/getTokenFromUrl";
-import getData from "./components/GetAPI/Axios";
+import getTokenFromUrl from "./components/Auth/getTokenFromUrl";
 import { useStore, actions } from "./components/Store";
 import SpotifyWebApi from "spotify-web-api-js";
 import {
@@ -14,7 +10,6 @@ import {
     setTopArtist,
     setUser,
 } from "./components/Store/actions";
-import CategoryItem from "./components/Utils/Category/CategoryItem";
 
 export const spotify = new SpotifyWebApi();
 function App() {

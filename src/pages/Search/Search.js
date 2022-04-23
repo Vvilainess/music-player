@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import Container from "../../components/Body-components/Container";
+import Content from "../../components/Body-components/Content";
 import Header from "../../components/Header-components/Header";
 import { actions, useStore } from "../../components/Store";
 import AlbumsResult from "./AlbumsResult";
@@ -16,9 +18,9 @@ const Search = () => {
         }
     }, [searchResult, input, artists, categories, dispatch]);
     return (
-        <div className="relative bg-[#121212] pb-[150px]">
+        <Container>
             <Header searchInput={true} background="bg-[#101010]" />
-            <div className="px-9 py-7">
+            <Content>
                 {!searchResult?.album?.[0] && input && (
                     <EmptyResult input={input} />
                 )}
@@ -39,8 +41,8 @@ const Search = () => {
                         </div>
                     </>
                 )}
-            </div>
-        </div>
+            </Content>
+        </Container>
     );
 };
 
