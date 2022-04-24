@@ -7,7 +7,7 @@ import AlbumsResult from "./AlbumsResult";
 import ArtistsResult from "./ArtistsResult";
 import CategoriesResult from "./CategoriesResult";
 import EmptyResult from "./EmptyResult";
-import Songslist from "./Songslist";
+import SongsList from "./SongsList";
 import TopResult from "./TopResult";
 
 const Search = () => {
@@ -16,6 +16,7 @@ const Search = () => {
         if (!input) {
             dispatch(actions.setSearchResult(null));
         }
+        console.log("rendered...");
     }, [searchResult, input, artists, categories, dispatch]);
     return (
         <Container>
@@ -29,9 +30,9 @@ const Search = () => {
                 )}
                 {searchResult && searchResult.album && (
                     <>
-                        <div className="flex sm:flex-wrap md:flex-wrap">
+                        <div className="gap-x-6 grid grid-rows-1 xs:grid-col-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xxl:grid-cols-6">
                             <TopResult searchResult={searchResult} />
-                            <Songslist searchResult={searchResult} />
+                            <SongsList searchResult={searchResult} />
                         </div>
                         <div className="">
                             <ArtistsResult artists={artists} />

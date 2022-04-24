@@ -9,7 +9,7 @@ const PlaylistItem = ({ playlist }) => {
     useEffect(() => {}, [token, dispatch]);
     return (
         <Link
-            to={"/playlist" + "/" + playlist.id}
+            to={`/playlist/${playlist.id}`}
             className="group rounded-md inline-block bg-[#181818] hover:bg-[#282828] transition ease-in duration-400 cursor-pointer"
             onClick={() => {
                 getData(
@@ -36,7 +36,7 @@ const PlaylistItem = ({ playlist }) => {
                             {playlist?.images?.[0]?.url ? (
                                 <img
                                     src={playlist?.images[0]?.url}
-                                    alt="image"
+                                    alt={playlist.name}
                                     className="absolute rounded-md left-0 top-0 w-full h-full shadow-lg shadow-black"
                                 />
                             ) : (

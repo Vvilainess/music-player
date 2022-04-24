@@ -30,24 +30,28 @@ const SearchInput = ({ searchInput }) => {
     const debouceSearch = useCallback(
         debounce(
             (inputValue) =>
-                spotify
-                    .searchAlbums(inputValue, { limit: 6 })
-                    .then((response) => {
-                        const newSearchResult = groupBy(["album_type"]);
-                        const obj = newSearchResult(response.albums.items);
-                        if (input) {
-                            dispatch(actions.setSearchResult(obj));
+                spotify.searchAlbums(
+                    inputValue,
+                    { limit: 6 },
+                    (error, response) => {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            const newSearchResult = groupBy(["album_type"]);
+                            const obj = newSearchResult(response.albums.items);
+                            if (inputValue && obj) {
+                                dispatch(actions.setSearchResult(obj));
+                            }
                         }
-                    })
-                    .then(
                         spotify
                             .searchArtists(inputValue, { limit: 6, offset: 6 })
                             .then((response) =>
                                 dispatch(
                                     actions.setArtist(response.artists.items)
                                 )
-                            )
-                    ),
+                            );
+                    }
+                ),
             1000
         ),
         []
