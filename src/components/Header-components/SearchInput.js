@@ -111,7 +111,7 @@ const SearchInput = ({ searchInput }) => {
                             type="text"
                             name="search"
                             placeholder="Artists, songs, or podcasts"
-                            className="sm:w-64 md:w-96 px-11 py-2 rounded-full text-black text-ellipsis focus-visible:outline-none"
+                            className="xs:w-54 sm:w-64 md:w-64 px-11 py-2 rounded-full text-black text-ellipsis focus-visible:outline-none"
                         />
                         <AiIcons.AiOutlineSearch className="absolute top-0 left-0 h-full text-2xl ml-3" />
                         {input && (

@@ -26,23 +26,23 @@ const LoginBtn = ({ user }) => {
                 onClick={handleBtn}
                 className={
                     isMenuOpen
-                        ? "bg-black hover:bg-[#282828] rounded-full flex justify-center items-center md:pl-1 md:pr-3 md:py-1 mr-3"
-                        : "bg-black hover:bg-[#282828] rounded-full flex justify-center items-center md:pl-1 md:pr-3 md:py-1 mr-3"
+                        ? "bg-black hover:bg-[#282828] rounded-full flex justify-center items-center pl-1 pr-3 py-1 mr-3"
+                        : "bg-black hover:bg-[#282828] rounded-full flex justify-center items-center pl-1 pr-3 py-1 mr-3"
                 }
             >
                 <img
-                    className="w-7 h-7 rounded-full md:mr-2"
+                    className="w-7 h-7 rounded-full mr-2"
                     alt={user?.display_name}
                     src={user?.images?.[0].url}
                 />
-                <p to="" className="text-white hidden lg:block">
+                <p className="text-white xs:hidden sm:hidden md:hidden block">
                     {user?.display_name}
                 </p>
-                <span to="">
+                <span>
                     {isMenuOpen ? (
-                        <IoIcons.IoMdArrowDropup className="text-white font-md hidden md:block" />
+                        <IoIcons.IoMdArrowDropup className="text-white font-md xs:hidden sm:hidden md:hidden block" />
                     ) : (
-                        <IoIcons.IoMdArrowDropdown className="text-white font-md hidden md:block" />
+                        <IoIcons.IoMdArrowDropdown className="text-white font-md xs:hidden sm:hidden md:hidden block" />
                     )}
                 </span>
             </div>

@@ -9,6 +9,7 @@ import {
     SET_INPUT,
     SET_ARTISTS,
     SET_PLAYLISTDETAIL,
+    SET_DISCOVERY,
 } from "./constants";
 
 const initialState = {
@@ -78,6 +79,11 @@ function reducer(state, actions) {
             return {
                 ...state,
                 input: actions.payload,
+            };
+        case SET_DISCOVERY:
+            return {
+                ...state,
+                discovery_weekly: actions.payload,
             };
         default:
             throw new Error("Invalid action!");

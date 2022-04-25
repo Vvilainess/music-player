@@ -11,7 +11,7 @@ const Header = ({ searchInput, background }) => {
             className={
                 background +
                 " " +
-                "sticky h-[64px] flex justify-between items-center z-10"
+                "absolute w-full h-[64px] flex justify-between items-center z-10"
             }
         >
             <HeaderButton />

@@ -33,6 +33,16 @@ function App() {
                 console.log(response.categories.items);
                 dispatch(setCategories(response.categories.items));
             });
+            /* spotify
+                .getPlaylist("37i9dQZEVXcJZyENOWUFo7")
+                .then((response) => dispatch(setWe)); */
+            spotify.getMyTopArtists((err, data) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(data);
+                }
+            });
             /* spotify.searchAlbums("taeyeon").then((result) => {
                 console.log(result);
             }); */
