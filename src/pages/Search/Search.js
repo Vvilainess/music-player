@@ -22,11 +22,11 @@ const Search = () => {
         <Container>
             <Header searchInput={true} background="bg-[#101010]" />
             <Content>
-                {!searchResult?.album?.[0] && input && (
-                    <EmptyResult input={input} />
-                )}
                 {!searchResult && !input && (
                     <CategoriesResult categories={categories} />
+                )}
+                {!searchResult?.album?.[0] && input && (
+                    <EmptyResult input={input} />
                 )}
                 {searchResult && searchResult.album && (
                     <>

@@ -1,57 +1,14 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import * as AiIcons from "react-icons/ai";
+import React from "react";
+import PlaybackControl from "./PlaybackControl";
+import PlayingTrack from "./PlayingTrack";
+import VolumnControl from "./VolumnControl";
 const PlayBack = () => {
-    const [heart, setHeart] = useState(false);
-    const handleHeart = () => {
-        setHeart((prev) => !prev);
-    };
     return (
         <footer className="absolute block bg-[#181818] w-full left-0 bottom-0 z-10">
-            <div className="h-auto bg-[#181818] border-t border-[#282828] flex flex-col min-w-[620px]">
-                <div className="flex flex-row justify-start px-4 py-0 h-[90px]">
-                    <div className="flex flex-col items-center justify-center">
-                        <div className="relative">
-                            <Link to="/">
-                                <img
-                                    src="https://i.scdn.co/image/ab67616d000048510785b44c5a814bb1318ebc8e"
-                                    alt=""
-                                    className="bg-black bg-center bg-no-repeat bg-contain h-full left-0 top-0 w-full"
-                                />
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-center justify-center">
-                        <div className="mx-3 items-center text-white font-md hover:underline transition-all duration-150">
-                            Track Title
-                        </div>
-                        <div className="flex flex-row">
-                            <span>
-                                <Link
-                                    to=""
-                                    className="text-[#b3b3b3] hover:text-white font-xs hover:underline transition-all duration-150"
-                                >
-                                    Artist1
-                                </Link>
-                            </span>
-                            <span>
-                                <Link
-                                    to=""
-                                    className="text-[#b3b3b3] hover:text-white font-xs hover:underline transition-all duration-150"
-                                >
-                                    Artist2
-                                </Link>
-                            </span>
-                        </div>
-                    </div>
-                    <button className="" onClick={handleHeart}>
-                        {heart ? (
-                            <AiIcons.AiFillHeart className="text-emerald-700 font-lg font-bold " />
-                        ) : (
-                            <AiIcons.AiOutlineHeart className="text-white font-lg font-bold" />
-                        )}
-                    </button>
-                </div>
+            <div className="flex flex-row h-auto bg-[#181818] border-t border-[#282828]">
+                <PlayingTrack />
+                <PlaybackControl />
+                <VolumnControl />
             </div>
         </footer>
     );

@@ -3,20 +3,17 @@ import { useStore } from "../Store";
 import LoginBtn from "../Feature-components/LoginBtn";
 import SearchInput from "./SearchInput";
 import HeaderButton from "./HeaderButton";
+import ContentHeader from "../Body-components/ContentHeader";
 
 const Header = ({ searchInput, background }) => {
     const [{ user }] = useStore();
     return (
-        <div
-            className={
-                background +
-                " " +
-                "absolute w-full h-[64px] flex justify-between items-center z-10"
-            }
-        >
-            <HeaderButton />
-            <SearchInput searchInput={searchInput} />
-            <div className="">{user && <LoginBtn user={user} />}</div>
+        <div className={`absolute ${background} w-full z-10`}>
+            <ContentHeader>
+                <HeaderButton />
+                <SearchInput searchInput={searchInput} />
+                {user && <LoginBtn user={user} />}
+            </ContentHeader>
         </div>
     );
 };
