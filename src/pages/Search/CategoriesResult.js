@@ -10,8 +10,9 @@ const CategoriesResult = ({ categories }) => {
                     browser all
                 </Title>
             </div>
-            <div className="grid grid-flow-row xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xxl:grid-cols-6  gap-5">
+            <div className="grid grid-flow-row xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xxl:grid-cols-7 gap-5">
                 {categories.map((category, idx) => {
+                    console.log(category.id);
                     return <CategoryItem category={category} key={idx} />;
                 })}
             </div>

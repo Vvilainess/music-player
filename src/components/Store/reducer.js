@@ -9,7 +9,9 @@ import {
     SET_INPUT,
     SET_ARTISTS,
     SET_PLAYLISTDETAIL,
-    SET_DISCOVERY,
+    SET_TOPLIST,
+    SET_TRENDING,
+    SET_NEWRELEASE,
 } from "./constants";
 
 const initialState = {
@@ -22,8 +24,10 @@ const initialState = {
     input: "",
     searchResult: null,
     artists: null,
-    discovery_weekly: null,
+    toplist: null,
     top_artists: null,
+    trending: null,
+    newRelease: null,
     playing: false,
     categories: [],
 };
@@ -80,10 +84,20 @@ function reducer(state, actions) {
                 ...state,
                 input: actions.payload,
             };
-        case SET_DISCOVERY:
+        case SET_TOPLIST:
             return {
                 ...state,
-                discovery_weekly: actions.payload,
+                toplist: actions.payload,
+            };
+        case SET_TRENDING:
+            return {
+                ...state,
+                trending: actions.payload,
+            };
+        case SET_NEWRELEASE:
+            return {
+                ...state,
+                newRelease: actions.payload,
             };
         default:
             throw new Error("Invalid action!");

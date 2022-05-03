@@ -8,4 +8,6 @@ export const SET_INPUT = "set_input";
 export const SET_RECENTPLAYED = "set_recentplayed";
 export const SET_ARTISTS = "set_artists";
 export const SET_PLAYLISTDETAIL = "set_playlistdetail";
-export const SET_DISCOVERY = "set_discovery";
+export const SET_TOPLIST = "set_toplist";
+export const SET_TRENDING = "set_trending";
+export const SET_NEWRELEASE = "set_newrelease";

@@ -6,8 +6,11 @@ import { useStore, actions } from "./components/Store";
 import SpotifyWebApi from "spotify-web-api-js";
 import {
     setCategories,
+    setNewRelease,
     setPlaylist,
     setTopArtist,
+    setTopList,
+    setTrending,
     setUser,
 } from "./components/Store/actions";
 
@@ -29,13 +32,10 @@ function App() {
             spotify.getUserPlaylists().then((playlists) => {
                 dispatch(setPlaylist(playlists.items));
             });
-            spotify.getCategories().then((response) => {
-                console.log(response.categories.items);
+            spotify.getCategories({ limit: 50 }).then((response) => {
+                console.log(response);
                 dispatch(setCategories(response.categories.items));
             });
-            /* spotify
-                .getPlaylist("37i9dQZEVXcJZyENOWUFo7")
-                .then((response) => dispatch(setWe)); */
             spotify.getMyTopArtists((err, data) => {
                 if (err) {
                     console.log(err);
@@ -43,36 +43,23 @@ function App() {
                     console.log(data);
                 }
             });
-            /* spotify.searchAlbums("taeyeon").then((result) => {
-                console.log(result);
-            }); */
-            /* getData("https://api.spotify.com/v1/me", access_token, "GET")
-                .then((userResponse) => {
-                    const { display_name, images, id } = userResponse.data;
-                    console.log(id);
-                    dispatch(actions.setUser({ display_name, images, id }));
-                })
-                .then(
-                    getPlaylist(
-                        `https://api.spotify.com/v1/me/playlists`,
-                        access_token
-                    ).then((response) => {
-                        const { items } = response.data;
-                        dispatch(actions.setPlaylist(items));
-                    })
-                )
-                .then(
-                    getCategories(
-                        `https://api.spotify.com/v1/browse/categories?offset=0&limit=50`,
-                        access_token
-                    ).then((response) => {
-                        dispatch(
-                            actions.setCategories(
-                                response.data.categories.items
-                            )
-                        );
-                    })
-                ); */
+            spotify.getCategoryPlaylists("toplists", (err, data) => {
+                if (err) console.log(err);
+                if (data)
+                    dispatch(setTopList(data.playlists.items.slice(0, 6)));
+                console.log(data.playlists.items);
+            });
+            spotify.getCategoryPlaylists("popculture", (err, data) => {
+                if (err) console.log(err);
+                if (data)
+                    dispatch(setTrending(data.playlists.items.slice(0, 6)));
+                console.log(data.playlists.items);
+            });
+            spotify.getNewReleases((err, data) => {
+                if (err) console.log(err);
+                if (data)
+                    dispatch(setNewRelease(data.albums.items.slice(0, 6)));
+            });
         }
         return () => {};
     }, [token, playlists, input, user, dispatch]);
