@@ -8,10 +8,10 @@ import {
     SET_RECENTPLAYED,
     SET_ARTISTS,
     SET_PLAYLISTDETAIL,
-    SET_TOP_ARTISTS,
     SET_TOPLIST,
     SET_TRENDING,
     SET_NEWRELEASE,
+    SET_TOP_ARTISTS,
 } from "./constants";
 
 export const setToken = (payload) => ({

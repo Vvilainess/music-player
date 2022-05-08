@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../../pages/Home/Home";
 import Search from "../../pages/Search/Search";
 import Library from "../../pages/Library";
-import LikedSongs from "../../pages/LikedSongs";
+import LikedSongs from "../../pages/LikedSongs/LikedSongs";
 import CreatePlaylist from "../../pages/CreatePlaylist";
 import PlaylistItemDetail from "../Utils/Playlist/PlaylistItemDetail";
 const Switch = () => {
@@ -11,7 +11,7 @@ const Switch = () => {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/collection/playlist" element={<Library />} />
+            <Route path="/collection/playlists" element={<Library />} />
             <Route path="/playlist" element={<CreatePlaylist />} />
             <Route path="/collection/tracks" element={<LikedSongs />} />
             <Route path="/playlist/:id" element={<PlaylistItemDetail />} />

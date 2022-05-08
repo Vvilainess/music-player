@@ -52,7 +52,7 @@ const FeatureMenu = () => {
                     </li>
                     <li className="flex items-center pb-3 px-5">
                         <Link
-                            to="/collection/playlist"
+                            to="/collection/playlists"
                             className={
                                 isActiveTab === 3
                                     ? "flex items-center justify-start text-white hover:text-white transition-all ease duration-200"
@@ -96,7 +96,7 @@ const FeatureMenu = () => {
                     </li>
                     <li className="px-5 py-1">
                         <Link
-                            to="/collection/playlist"
+                            to="/collection/tracks"
                             onClick={() => {
                                 handleTab(5);
                             }}

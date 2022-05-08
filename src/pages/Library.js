@@ -12,7 +12,7 @@ const Library = () => {
     useEffect(() => {}, [playlist]);
     return (
         <Container>
-            <Header background={"bg-transparient"} />
+            <Header searchInput={false} background={"bg-transparent"} />
             <Content>
                 <>
                     <Title className="text-white text-2xl font-bold capitalize">

@@ -5,14 +5,14 @@ import SearchInput from "./SearchInput";
 import HeaderButton from "./HeaderButton";
 import ContentHeader from "../Body-components/ContentHeader";
 
-const Header = ({ searchInput, background }) => {
+const Header = ({ searchInput, background = "transparient", filter }) => {
     const [{ user }] = useStore();
     return (
         <div className={`absolute ${background} w-full z-10`}>
             <ContentHeader>
                 <HeaderButton />
-                <SearchInput searchInput={searchInput} />
-                {user && <LoginBtn user={user} />}
+                {searchInput ? <SearchInput /> : <div></div>}
+                {user && <LoginBtn />}
             </ContentHeader>
         </div>
     );

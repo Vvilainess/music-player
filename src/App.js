@@ -8,6 +8,7 @@ import {
     setCategories,
     setNewRelease,
     setPlaylist,
+    setRecentPlayed,
     setTopArtist,
     setTopList,
     setTrending,
@@ -53,12 +54,24 @@ function App() {
                 if (err) console.log(err);
                 if (data)
                     dispatch(setTrending(data.playlists.items.slice(0, 6)));
-                console.log(data.playlists.items);
             });
             spotify.getNewReleases((err, data) => {
                 if (err) console.log(err);
                 if (data)
                     dispatch(setNewRelease(data.albums.items.slice(0, 6)));
+            });
+            spotify.getMyTopArtists((err, data) => {
+                if (err) console.log(err);
+                if (data) dispatch(setTopArtist(data.items.slice(0, 6)));
+                console.log(data.items);
+            });
+            /* spotify.getMyRecentlyPlayedTracks((err, data) => {
+                if (err) console.log(err);
+                if (data) dispatch(setRecentPlayed(data.items.slice(0, 6)));
+            }); */
+            spotify.getMySavedTracks((err, data) => {
+                if (err) console.log(err);
+                if (data) console.log(data);
             });
         }
         return () => {};

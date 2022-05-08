@@ -1,6 +1,5 @@
 import React from "react";
-import Title from "../../components/Body-components/Title";
-
+import Title from "../../../components/Body-components/Title";
 const EmptyResult = ({ input }) => {
     return (
         <div className="w-full h-screen top-0 right-0 bottom-0">

@@ -1,6 +1,6 @@
 import React from "react";
-import Title from "../../components/Body-components/Title";
-import SearchResultItem from "../../components/Utils/SearchResultItem";
+import Title from "../../../components/Body-components/Title";
+import SearchResultItem from "../../../components/Utils/SearchResultItem";
 
 const PlayListsRow = ({ title, data }) => {
     return (

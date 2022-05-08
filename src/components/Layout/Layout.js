@@ -10,7 +10,7 @@ const Layout = () => {
             <div className="flex flex-row">
                 <SideBar />
                 <Body>
-                    <div className="relative top-0">
+                    <div className="">
                         <Switch />
                     </div>
                 </Body>

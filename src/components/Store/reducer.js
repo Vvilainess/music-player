@@ -20,7 +20,7 @@ const initialState = {
     topartists: {},
     playlist: [],
     playlistDetail: null,
-    recentPlayed: {},
+    recentPlayed: null,
     input: "",
     searchResult: null,
     artists: null,
@@ -47,7 +47,7 @@ function reducer(state, actions) {
         case SET_TOP_ARTISTS:
             return {
                 ...state,
-                topartists: actions.payload,
+                top_artists: actions.payload,
             };
         case SET_PLAYLIST:
             return {
@@ -62,7 +62,7 @@ function reducer(state, actions) {
         case SET_RECENTPLAYED:
             return {
                 ...state,
-                recentPlayed: [...state, actions.payload],
+                recentPlayed: actions.payload,
             };
         case SET_CATEGORIES:
             return {

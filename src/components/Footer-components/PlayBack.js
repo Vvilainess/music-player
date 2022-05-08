@@ -4,8 +4,8 @@ import PlayingTrack from "./PlayingTrack";
 import VolumnControl from "./VolumnControl";
 const PlayBack = () => {
     return (
-        <footer className="absolute block bg-[#181818] w-full left-0 bottom-0 z-10">
-            <div className="flex flex-row h-auto bg-[#181818] border-t border-[#282828]">
+        <footer className="absolute flex flex-1 items-center bg-[#181818] border-[#282828] border-t bottom-0 h-[90px] left-0 w-full z-10">
+            <div className="flex flex-1 flex-row h-auto bg-[#181818] px-4">
                 <PlayingTrack />
                 <PlaybackControl />
                 <VolumnControl />

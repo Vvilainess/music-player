@@ -3,12 +3,12 @@ import Container from "../../components/Body-components/Container";
 import Content from "../../components/Body-components/Content";
 import Header from "../../components/Header-components/Header";
 import { actions, useStore } from "../../components/Store";
-import AlbumsResult from "./AlbumsResult";
-import ArtistsResult from "./ArtistsResult";
-import CategoriesResult from "./CategoriesResult";
-import EmptyResult from "./EmptyResult";
-import SongsList from "./SongsList";
-import TopResult from "./TopResult";
+import AlbumsResult from "./components/AlbumsResult";
+import ArtistsResult from "./components/ArtistsResult";
+import CategoriesResult from "./components/CategoriesResult";
+import EmptyResult from "./components/EmptyResult";
+import SongsList from "./components/SongsList";
+import TopResult from "./components/TopResult";
 
 const Search = () => {
     const [{ categories, searchResult, input, artists }, dispatch] = useStore();

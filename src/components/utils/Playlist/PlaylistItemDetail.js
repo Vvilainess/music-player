@@ -2,25 +2,16 @@ import React, { useEffect } from "react";
 import Header from "../../Header-components/Header";
 import { useStore } from "../../Store";
 import { Link, useLocation } from "react-router-dom";
-import * as FaIcons from "react-icons/fa";
-import * as BsIcons from "react-icons/bs";
-
+import { FaPlay } from "react-icons/fa";
+import { BsThreeDots } from "react-icons/bs";
+import TracksTable from "./TracksTable";
+import FindMoreBtn from "../Button/FindMoreBtn";
 const PlaylistItemDetail = () => {
     const [{ playlistDetail }] = useStore();
-    console.log(playlistDetail);
     const playlistOwner = useLocation().state.owner;
     const playlistImage = useLocation().state.images;
     const playlistName = useLocation().state.name;
-    const options = {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-    };
-    function millisToMinutesAndSeconds(millis) {
-        var minutes = Math.floor(millis / 60000);
-        var seconds = ((millis % 60000) / 1000).toFixed(0);
-        return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-    }
+
     useEffect(() => {}, [playlistDetail]);
 
     return (
@@ -58,7 +49,7 @@ const PlaylistItemDetail = () => {
                             <p className="text-white text-xs md:text-sm lg:text-base font-bold uppercase">
                                 Playlist
                             </p>
-                            <h1 className="text-white text-3xl leading-[30px] md:text-5xl md:leading-[48px] lg:text-8xl lg:leading-[96px] font-bold py-[0.08em]">
+                            <h1 className="text-white text-3xl leading-[30px] md:text-5xl md:leading-[48px] lg:text-7xl lg:leading-[72px] xl:text-8xl xl:leading-[96px] xxl:text-8xl xxl:leading-[96px] font-bold py-[0.08em]">
                                 {playlistName}
                             </h1>
                             <div className="flex items-center flex-wrap mt-[8px]">
@@ -90,148 +81,21 @@ const PlaylistItemDetail = () => {
                         <div className="flex flex-row items-center mr-8 cursor-pointer group">
                             <div className="relative rounded-full bg-[#1ed760] inline-block p-4 group-hover:scale-110 transition duration-150">
                                 <span>
-                                    <FaIcons.FaPlay />
+                                    <FaPlay />
                                 </span>
                             </div>
                         </div>
                         <div className="cursor-pointer">
                             <div>
                                 <span>
-                                    <BsIcons.BsThreeDots className="text-[#b3b3b3] text-2xl hover:text-white" />
+                                    <BsThreeDots className="text-[#b3b3b3] text-2xl hover:text-white" />
                                 </span>
                             </div>
                         </div>
                     </div>
                     <div className="px-5">
-                        <table className="w-full">
-                            <thead>
-                                <tr className="p-7">
-                                    <th
-                                        data-priority="1"
-                                        className="tableHeading"
-                                    >
-                                        #
-                                    </th>
-                                    <th
-                                        data-priority="2"
-                                        className="tableHeading"
-                                    >
-                                        TITLE
-                                    </th>
-                                    <th
-                                        data-priority="3"
-                                        className="tableHeading"
-                                    >
-                                        ALBUM
-                                    </th>
-                                    <th
-                                        data-priority="4"
-                                        className="tableHeading"
-                                    >
-                                        DATE ADDED
-                                    </th>
-                                    <th
-                                        data-priority="5"
-                                        className="tableHeading"
-                                    >
-                                        <div className="flex flex-row justify-start items-center">
-                                            <span className="mr-5">
-                                                <BsIcons.BsClock className="font-bold text-lg" />
-                                            </span>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {playlistDetail?.map((item, idx) => {
-                                    return (
-                                        <tr
-                                            key={idx}
-                                            className="hover:bg-[#ffffff1a] cursor-pointer"
-                                        >
-                                            <td className="col-item rounded-tl-lg rounded-bl-lg">
-                                                {idx + 1}
-                                            </td>
-                                            <td className="col-item">
-                                                <div className="flex flex-row items-center">
-                                                    <div>
-                                                        <img
-                                                            src={
-                                                                item.track.album
-                                                                    ?.images?.[2]
-                                                                    ?.url
-                                                            }
-                                                            alt=""
-                                                            className="w-12 h-12"
-                                                        />
-                                                    </div>
-                                                    <div className="flex flex-col justify-between h-full ml-5">
-                                                        <div>
-                                                            <span>
-                                                                {
-                                                                    item.track
-                                                                        .name
-                                                                }
-                                                            </span>
-                                                        </div>
-                                                        <div>
-                                                            <span className="table-artist">
-                                                                {item.track.artists.map(
-                                                                    (
-                                                                        artist,
-                                                                        idx
-                                                                    ) => (
-                                                                        <Link
-                                                                            to="/"
-                                                                            key={
-                                                                                idx
-                                                                            }
-                                                                        >
-                                                                            {(idx
-                                                                                ? ", "
-                                                                                : "") +
-                                                                                artist.name}
-                                                                        </Link>
-                                                                    )
-                                                                )}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="col-item">
-                                                <Link
-                                                    to="/"
-                                                    className="table-album"
-                                                >
-                                                    {item.track.album.name}
-                                                </Link>
-                                            </td>
-                                            <td className="col-item text-[#b3b3b3]">
-                                                {new Date(
-                                                    item.added_at
-                                                ).toLocaleDateString(
-                                                    "en-US",
-                                                    options
-                                                )}
-                                            </td>
-                                            <td className="col-item text-[#b3b3b3] rounded-tr-lg rounded-br-lg">
-                                                <div className="flex flex-row tabular-nums">
-                                                    {millisToMinutesAndSeconds(
-                                                        item.track.duration_ms
-                                                    )}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
-                        <button className="block ml-auto mt-8 mr-4 mb-0">
-                            <div className="inline-block uppercase text-xs tracking-widest leading-4 text-white font-bold">
-                                Find More
-                            </div>
-                        </button>
+                        <TracksTable playlistDetail={playlistDetail} />
+                        <FindMoreBtn />
                     </div>
                 </div>
             </div>

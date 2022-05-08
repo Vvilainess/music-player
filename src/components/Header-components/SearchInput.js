@@ -4,7 +4,7 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import { spotify } from "../../App";
 
-const SearchInput = ({ searchInput }) => {
+const SearchInput = () => {
     const [{ input, token }, dispatch] = useStore();
     const groupBy = (keys) => (array) =>
         array.reduce((objectsByKeyValue, obj) => {
@@ -100,34 +100,28 @@ const SearchInput = ({ searchInput }) => {
     // };
     return (
         <>
-            {searchInput ? (
-                <>
-                    <form autoComplete="off" className="ml-24 relative">
-                        <input
-                            value={input}
-                            onChange={(e) => {
-                                handleSubmitSearch(e);
-                            }}
-                            type="text"
-                            name="search"
-                            placeholder="Artists, songs, or podcasts"
-                            className="xs:w-54 sm:w-64 md:w-64 px-11 py-2 rounded-full text-black text-ellipsis focus-visible:outline-none"
-                        />
-                        <AiIcons.AiOutlineSearch className="absolute top-0 left-0 h-full text-2xl ml-3" />
-                        {input && (
-                            <IoIcons.IoMdClose
-                                onClick={() => {
-                                    dispatch(actions.setInput(""));
-                                }}
-                                className="absolute top-0 right-0 h-full text-2xl mr-3 cursor-pointer"
-                            />
-                        )}
-                        <div className=""></div>
-                    </form>
-                </>
-            ) : (
-                <div></div>
-            )}
+            <form autoComplete="off" className="ml-24 relative">
+                <input
+                    value={input}
+                    onChange={(e) => {
+                        handleSubmitSearch(e);
+                    }}
+                    type="text"
+                    name="search"
+                    placeholder="Artists, songs, or podcasts"
+                    className="xs:w-54 sm:w-64 md:w-64 px-11 py-2 rounded-full text-black text-ellipsis focus-visible:outline-none"
+                />
+                <AiIcons.AiOutlineSearch className="absolute top-0 left-0 h-full text-2xl ml-3" />
+                {input && (
+                    <IoIcons.IoMdClose
+                        onClick={() => {
+                            dispatch(actions.setInput(""));
+                        }}
+                        className="absolute top-0 right-0 h-full text-2xl mr-3 cursor-pointer"
+                    />
+                )}
+                <div className=""></div>
+            </form>
         </>
     );
 };

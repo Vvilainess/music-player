@@ -1,6 +1,6 @@
 import React from "react";
-import Title from "../../components/Body-components/Title";
-import Track from "../../components/Utils/Track/Track";
+import Title from "../../../components/Body-components/Title";
+import Track from "../../../components/Utils/Track/Track";
 
 const SongsList = ({ searchResult }) => {
     return (
