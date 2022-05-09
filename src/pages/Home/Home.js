@@ -9,9 +9,14 @@ const Home = () => {
         { toplist, trending, newRelease, top_artists, recentPlayed },
         dispatch,
     ] = useStore();
-    useEffect(() => {
-        console.log(top_artists);
-    }, [toplist, trending, newRelease, top_artists, recentPlayed, dispatch]);
+    useEffect(() => {}, [
+        toplist,
+        trending,
+        newRelease,
+        top_artists,
+        recentPlayed,
+        dispatch,
+    ]);
     return (
         <>
             <Container>

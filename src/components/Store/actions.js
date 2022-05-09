@@ -12,6 +12,8 @@ import {
     SET_TRENDING,
     SET_NEWRELEASE,
     SET_TOP_ARTISTS,
+    SET_DEVICES_ID,
+    SET_ISPLAYING,
 } from "./constants";
 
 export const setToken = (payload) => ({
@@ -64,5 +66,13 @@ export const setTrending = (payload) => ({
 });
 export const setNewRelease = (payload) => ({
     type: SET_NEWRELEASE,
+    payload,
+});
+export const setIsPlaying = (payload) => ({
+    type: SET_ISPLAYING,
+    payload,
+});
+export const setDevicesId = (payload) => ({
+    type: SET_DEVICES_ID,
     payload,
 });

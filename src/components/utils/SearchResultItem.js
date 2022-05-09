@@ -1,8 +1,9 @@
 import React from "react";
+import { FaPlay } from "react-icons/fa";
 
 const SearchResultItem = ({ item }) => {
     return (
-        <div className="rounded-md inline-block mb-5 cursor-pointer">
+        <div className="group relative rounded-md inline-block mb-5 cursor-pointer">
             <div className="px-5 py-7 shadow-lg shadow-black">
                 <div className="relative pb-1">
                     <div className="rounded-full relative pb-[100%] w-full">
@@ -32,6 +33,16 @@ const SearchResultItem = ({ item }) => {
                                     </svg>
                                 </div>
                             )}
+                        </div>
+                    </div>
+                    <div
+                        className="absolute xs:relative xs:mt-3 xs:ml-5 xs:inline-block xs:right-0 bottom-3 right-3 bg-green-600 px-4 py-4 rounded-full opacity-0 transition duration-400 ease-in-out shadow-slate-900 shadow-lg group-hover:transform group-hover:-translate-y-1 group-hover:opacity-100"
+                        onClick={() => {
+                            console.log("Play music...");
+                        }}
+                    >
+                        <div className="relative z-1 p-0 m-0">
+                            <FaPlay />
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ import { useStore, actions } from "./components/Store";
 import SpotifyWebApi from "spotify-web-api-js";
 import {
     setCategories,
+    setDevicesId,
     setNewRelease,
     setPlaylist,
     setRecentPlayed,
@@ -14,10 +15,11 @@ import {
     setTrending,
     setUser,
 } from "./components/Store/actions";
+const spotify = new SpotifyWebApi();
 
-export const spotify = new SpotifyWebApi();
 function App() {
-    const [{ token, playlists, input, user }, dispatch] = useStore();
+    const [{ token, playlists, input, user, devicesId, isPlaying }, dispatch] =
+        useStore();
     useEffect(() => {
         const { access_token } = getTokenFromUrl();
         window.location.hash = "";
@@ -36,13 +38,6 @@ function App() {
             spotify.getCategories({ limit: 50 }).then((response) => {
                 console.log(response);
                 dispatch(setCategories(response.categories.items));
-            });
-            spotify.getMyTopArtists((err, data) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(data);
-                }
             });
             spotify.getCategoryPlaylists("toplists", (err, data) => {
                 if (err) console.log(err);
@@ -63,7 +58,6 @@ function App() {
             spotify.getMyTopArtists((err, data) => {
                 if (err) console.log(err);
                 if (data) dispatch(setTopArtist(data.items.slice(0, 6)));
-                console.log(data.items);
             });
             /* spotify.getMyRecentlyPlayedTracks((err, data) => {
                 if (err) console.log(err);
@@ -75,8 +69,9 @@ function App() {
             });
         }
         return () => {};
-    }, [token, playlists, input, user, dispatch]);
+    }, [token, playlists, input, user, devicesId, isPlaying]);
     return <div className="App">{token ? <Layout /> : <Login />}</div>;
 }
 
 export default App;
+export { spotify };

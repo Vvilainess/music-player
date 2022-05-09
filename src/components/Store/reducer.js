@@ -12,6 +12,8 @@ import {
     SET_TOPLIST,
     SET_TRENDING,
     SET_NEWRELEASE,
+    SET_ISPLAYING,
+    SET_DEVICES_ID,
 } from "./constants";
 
 const initialState = {
@@ -28,8 +30,9 @@ const initialState = {
     top_artists: null,
     trending: null,
     newRelease: null,
-    playing: false,
     categories: [],
+    isPlaying: false,
+    devicesId: {},
 };
 
 function reducer(state, actions) {
@@ -98,6 +101,16 @@ function reducer(state, actions) {
             return {
                 ...state,
                 newRelease: actions.payload,
+            };
+        case SET_ISPLAYING:
+            return {
+                ...state,
+                isPlaying: !actions.payload,
+            };
+        case SET_DEVICES_ID:
+            return {
+                ...state,
+                devicesId: actions.payload,
             };
         default:
             throw new Error("Invalid action!");

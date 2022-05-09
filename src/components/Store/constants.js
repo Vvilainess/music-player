@@ -11,3 +11,5 @@ export const SET_PLAYLISTDETAIL = "set_playlistdetail";
 export const SET_TOPLIST = "set_toplist";
 export const SET_TRENDING = "set_trending";
 export const SET_NEWRELEASE = "set_newrelease";
+export const SET_DEVICES_ID = "set_devices_id";
+export const SET_ISPLAYING = "set_isplaying";

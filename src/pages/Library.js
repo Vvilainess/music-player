@@ -9,7 +9,9 @@ import Content from "../components/Body-components/Content";
 
 const Library = () => {
     const [{ playlist }] = useStore();
-    useEffect(() => {}, [playlist]);
+    useEffect(() => {
+        document.title = "Spotify - Your Library";
+    }, [playlist]);
     return (
         <Container>
             <Header searchInput={false} background={"bg-transparent"} />
