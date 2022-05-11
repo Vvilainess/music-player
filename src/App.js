@@ -67,6 +67,13 @@ function App() {
                 if (err) console.log(err);
                 if (data) console.log(data);
             });
+            spotify.getMyDevices((err, succ) => {
+                if (err) dispatch(actions.setDevicesId(null));
+                if (succ) {
+                    console.log(succ.devices[0]);
+                    dispatch(actions.setDevicesId(succ.devices[0]));
+                }
+            });
         }
         return () => {};
     }, [token, playlists, input, user, devicesId, isPlaying]);
